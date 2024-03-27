@@ -1,0 +1,152 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5b6560;
+  height: 60px;
+  width: 100%;
+
+  .header-left {
+    margin-left: 80px;
+
+    .header-logo {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .header-links {
+    display: flex;
+    align-items: center;
+    margin-right: 80px;
+  }
+
+  .header-links a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .header-badge-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    margin-left: 20px;
+    cursor: pointer;
+
+    .header-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .header-initial {
+      color: #a1a7bc;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 8px 3px;
+    }
+  }
+}
+
+.header-profile-popup-container {
+  width: 250px;
+  height: 350px;
+  background-color: rgb(207, 233, 229);
+  position: absolute;
+  top: 60px;
+  right: 0px;
+
+  .popup-header {
+    background-color: rgb(115, 129, 129);
+    height: 25%;
+  }
+
+  .popup-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 75%;
+    margin-top: 20px;
+
+    .header-language-part-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      margin-right: 28px;
+    }
+
+    .header-language-part-container:hover {
+      color: #033929;
+    }
+
+    .header-popup-option:hover {
+      color: #033929;
+    }
+
+    .header-popup-icon {
+      margin-right: 20px;
+    }
+
+    .header-popup-arrow-icon {
+      margin-left: auto;
+    }
+
+    a,
+    p {
+      text-align: left;
+      width: 100%;
+      margin-left: 30px;
+    }
+
+    h3 {
+      cursor: pointer !important;
+    }
+  }
+
+  .popup-cicrle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    margin-top: 20px;
+    position: absolute;
+    top: calc(6%);
+    left: 85px;
+    border: 2px solid rgb(38, 86, 86);
+  }
+
+  .popup-initial {
+    color: rgb(38, 86, 86);
+    font-size: 30px;
+    font-weight: bold;
+    margin: 25px 10px;
+  }
+}
+
+.language-popup-container {
+  position: absolute;
+  display: flex;
+  width: 200px;
+  height: 100px;
+  background-color: rgb(225, 235, 234);
+  top: 310px;
+  right: 250px;
+
+  .language-options {
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // padding: 2px;
+      margin: 20px 20px;
+      color: #033929;
+    }
+    p:hover {
+      color: #9b9494;
+    }
+  }
+}
