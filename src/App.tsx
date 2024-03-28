@@ -6,20 +6,18 @@ import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import Navbar from './layout/Navbar/Navbar';
 
-const App =() => {
+const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Navbar />
       <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
+        <Header />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-
-    
   );
 }
 
