@@ -22,11 +22,17 @@ interface NavItem {
   path: string;
 }
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  isNavbarOpen: boolean;
+  setIsNavbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ isNavbarOpen, setIsNavbarOpen }) => {
   const iconSize = '22px';
   const [isNavbarPopupOpen, setIsNavbarPopupOpen] = useState<boolean>(false);
 
   const toggleNavbar = () => {
+    setIsNavbarOpen(!isNavbarOpen);
     setIsNavbarPopupOpen(!isNavbarPopupOpen);
   };
 
@@ -46,7 +52,10 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <div className={`navbar-container ${isNavbarPopupOpen ? 'open' : 'closed'}`}>
+    <div className={`navbar-container ${isNavbarOpen ? 'open' : 'closed'}`}>
+      <div className="toggle-icon" onClick={toggleNavbar}>
+        {isNavbarPopupOpen ? <LeftOutlined /> : <RightOutlined />}
+      </div>
       <div className="nav-items">
         {navItems.map((item, index) => (
           <Link key={index} to={item.path} className="nav-item">
@@ -54,9 +63,6 @@ const Navbar: React.FC = () => {
             {isNavbarPopupOpen && <span>{item.title}</span>}
           </Link>
         ))}
-      </div>
-      <div className="toggle-icon" onClick={toggleNavbar}>
-        {isNavbarPopupOpen ? <LeftOutlined /> : <RightOutlined />}
       </div>
     </div>
   );
