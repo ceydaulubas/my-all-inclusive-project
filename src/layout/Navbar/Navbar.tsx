@@ -1,8 +1,10 @@
 // Navbar.tsx
 
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
+
+// Import the icons
 import {
   LeftOutlined,
   RightOutlined,
@@ -16,25 +18,20 @@ import {
   HomeOutlined
 } from "@ant-design/icons";
 
-interface NavItem {
-  title: string;
-  icon: JSX.Element;
-  path: string;
-}
+// Import the interfaces
+import { NavItem  } from '../../helper/interfaces';
 
-interface NavbarProps {
-  isNavbarOpen: boolean;
-  setIsNavbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// Import the redux hooks
+import type { RootState } from '../../redux/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { togglePopup } from '../../redux/navbarPopup/navbarPopupSlice'
 
-const Navbar: React.FC<NavbarProps> = ({ isNavbarOpen, setIsNavbarOpen }) => {
+const Navbar: React.FC = () => {
+
+  const isNavbarOpen = useSelector((state: RootState) => state.navbarPopup.isOpen);
+  const dispatch = useDispatch()
+  
   const iconSize = '22px';
-  const [isNavbarPopupOpen, setIsNavbarPopupOpen] = useState<boolean>(false);
-
-  const toggleNavbar = () => {
-    setIsNavbarOpen(!isNavbarOpen);
-    setIsNavbarPopupOpen(!isNavbarPopupOpen);
-  };
 
   const getIconWithSize = (icon: JSX.Element) => {
     return React.cloneElement(icon, { style: { fontSize: iconSize, color: '#555' } });
@@ -53,14 +50,14 @@ const Navbar: React.FC<NavbarProps> = ({ isNavbarOpen, setIsNavbarOpen }) => {
 
   return (
     <div className={`navbar-container ${isNavbarOpen ? 'open' : 'closed'}`}>
-      <div className="toggle-icon" onClick={toggleNavbar}>
-        {isNavbarPopupOpen ? <LeftOutlined /> : <RightOutlined />}
+      <div className="toggle-icon"  onClick={() => dispatch(togglePopup())}>
+        {isNavbarOpen ? <LeftOutlined /> : <RightOutlined />}
       </div>
       <div className="nav-items">
         {navItems.map((item, index) => (
           <Link key={index} to={item.path} className="nav-item">
             {item.icon}
-            {isNavbarPopupOpen && <span>{item.title}</span>}
+            {isNavbarOpen && <span>{item.title}</span>}
           </Link>
         ))}
       </div>
