@@ -1,12 +1,15 @@
 import React from 'react';
-import RandomQuote from '../../api/quotesApi';
+import WeatherApi from '../../api/weatherApi';
+import QuoteDisplay from '../../components/QuoteDisplay/QuoteDisplay';
 import './Home.scss';
 
 function Home() {
   return (
     <div className="home">
-Home
-<RandomQuote />
+<QuoteDisplay />
+<WeatherApi />
+<QuoteDisplay />
+<WeatherApi />
     </div>
 
 
