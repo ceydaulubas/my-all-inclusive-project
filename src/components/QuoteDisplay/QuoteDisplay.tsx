@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { fetchRandomQuote } from '../../api/fetchRandomQuote';
+import { fetchRandomQuoteApi } from '../../api/fetchRandomQuoteApi';
 
 import './QuoteDisplay.scss';
 
@@ -17,7 +17,7 @@ const QuoteDisplay: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchRandomQuote(dispatch);
+      await fetchRandomQuoteApi(dispatch);
     };
 
     fetchData();

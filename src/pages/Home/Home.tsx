@@ -1,15 +1,14 @@
 import React from 'react';
-import WeatherApi from '../../api/weatherApi';
 import QuoteDisplay from '../../components/QuoteDisplay/QuoteDisplay';
 import './Home.scss';
+import WeatherDisplay from '../../components/WeatherDisplay/WeatherDisplay';
 
 function Home() {
   return (
     <div className="home">
 <QuoteDisplay />
-<WeatherApi />
 <QuoteDisplay />
-<WeatherApi />
+<WeatherDisplay />
     </div>
 
 
