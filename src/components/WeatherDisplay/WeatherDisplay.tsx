@@ -76,6 +76,7 @@ const WeatherDisplay: React.FC = () => {
                 <img
                   src={`http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}.png`}
                   alt="weather-icon"
+                  className="current-weather-icon"
                 />
                 <p className="weather-description">
                   {currentWeatherData.weather[0].description
@@ -122,7 +123,13 @@ const WeatherDisplay: React.FC = () => {
       </div>
 
       {forecastWeatherData?.map((item: any, index: number) => (
-        <div key={index} className="weather-three-hour-forecast-container">
+        <div
+          key={index}
+          className={`weather-three-hour-forecast-container ${
+            index === 0 ? "first-child" : ""
+          }`}
+          style={index === 0 ? { marginLeft: "90px" } : {}}
+        >
           <div className="weather2">
             <p>{format(new Date(item.dt_txt), "h:mm a")}</p>
             <img
