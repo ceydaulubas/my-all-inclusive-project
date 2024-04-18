@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { format } from "date-fns";
+
+// Import Api
 import { fetchCurrentWeather, fetch5DaysWeather } from "../../api/index";
+
 import downArrow96 from "../../assets/icons/downArrow96.png";
 import sun from "../../assets/icons/sun.png";
 import upArrow96 from "../../assets/icons/upArrow96.png";
@@ -15,14 +19,9 @@ interface WeatherData {
   };
   weather: {
     description: string;
+    icon: string;
   }[];
   name: string;
-}
-
-interface ForecastItem {
-  main: {
-    temp: number;
-  };
 }
 
 const WeatherDisplay: React.FC = () => {
@@ -32,6 +31,10 @@ const WeatherDisplay: React.FC = () => {
     number[] | null
   >(null);
   const [error, setError] = useState<string>("");
+
+  const kelvinToCelcius = (kelvin: number) => {
+    return (kelvin - 273.15).toFixed(0);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,11 +54,9 @@ const WeatherDisplay: React.FC = () => {
         ]);
 
         setCurrentWeatherData(currentData);
-        setForecastWeatherData(
-          forecastData.list
-            .slice(0, 5)
-            .map((item: ForecastItem) => item.main.temp)
-        );
+        setForecastWeatherData(forecastData.list.slice(0, 5));
+
+        console.log(forecastData);
       } catch (error) {
         setError("Error fetching weather data");
       }
@@ -64,74 +65,74 @@ const WeatherDisplay: React.FC = () => {
     fetchData();
   }, []);
 
-  const kelvinToCelcius = (kelvin: number) => {
-    return (kelvin - 273.15).toFixed(0);
-  };
-
   return (
     <div className="weather-display-container">
-      <h2>Weather Information</h2>
-      {error ? (
-        <p>{error}</p>
-      ) : currentWeatherData && forecastWeatherData ? (
-        <div className="weather-info-container">
-          <div className="weather-icon-container">
-            <div>
-              <img src={sun} alt="sun" className="weather-forecast-icon" />
-              <p className="weather-description">
-                {currentWeatherData.weather[0].description
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")}
-              </p>
+      <div className="current-weather-display-container">
+        <h2>Weather Information</h2>
+        {currentWeatherData !== null && forecastWeatherData !== null ? (
+          <div className="weather-info-container">
+            <div className="weather-icon-container">
+              <div>
+                <img
+                  src={`http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}.png`}
+                  alt="weather-icon"
+                />
+                <p className="weather-description">
+                  {currentWeatherData.weather[0].description
+                    .split(" ")
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ")}
+                </p>
 
-              <div className="temp-details-container">
+                <div className="temp-details-container">
+                  <img
+                    src={upArrow96}
+                    alt="upArrow96"
+                    className="weather-forecast-up-arrow"
+                  />
+                  <p>{kelvinToCelcius(currentWeatherData.main.temp_max)}°C</p>
+                  <img
+                    src={downArrow96}
+                    alt="downArrow96"
+                    className="weather-forecast-down-arrow"
+                  />
+                  <p>{kelvinToCelcius(currentWeatherData.main.temp_min)} °C</p>
+                </div>
+              </div>
+            </div>
+            <div className="weather-details-container">
+              <div className="temp-container">
+                <p className="current-temp">
+                  {kelvinToCelcius(currentWeatherData.main.temp)} °C
+                </p>
+              </div>
+              <div className="location-icon-container">
                 <img
-                  src={upArrow96}
-                  alt="upArrow96"
-                  className="weather-forecast-up-arrow"
+                  src={location48}
+                  alt="location48"
+                  className="weather-location-icon"
                 />
-                <p>{kelvinToCelcius(currentWeatherData.main.temp_max)}°C</p>
-                <img
-                  src={downArrow96}
-                  alt="downArrow96"
-                  className="weather-forecast-down-arrow"
-                />
-                <p>{kelvinToCelcius(currentWeatherData.main.temp_min)} °C</p>
+                <p className="current-location">{currentWeatherData.name}</p>
               </div>
             </div>
           </div>
-          <div className="weather-details-container">
-            <div className="temp-container">
-              <p className="current-temp">
-                {kelvinToCelcius(currentWeatherData.main.temp)} °C
-              </p>
-            </div>
-            <div className="location-icon-container">
-              <img
-                src={location48}
-                alt="location48"
-                className="weather-location-icon"
-              />
-              <p className="current-location">{currentWeatherData.name}</p>
-            </div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+
+      {forecastWeatherData?.map((item: any, index: number) => (
+        <div key={index} className="weather-three-hour-forecast-container">
+          <div className="weather2">
+            <p>{format(new Date(item.dt_txt), "h:mm a")}</p>
+            <img
+              src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+              alt="weather-icon"
+            />
+            <p>{kelvinToCelcius(item.main.temp)} °C</p>
           </div>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-      {/* <div className="forecast-container">
-        <h3>Next 3 hours Temperature:</h3>
-        {forecastWeatherData && forecastWeatherData.length > 0 ? (
-          forecastWeatherData.map((forecast, index) => (
-            <p key={index} className="forecast-item">
-              {forecast}
-            </p>
-          ))
-        ) : (
-          <p>No forecast data available</p>
-        )}
-      </div> */}
+      ))}
     </div>
   );
 };
