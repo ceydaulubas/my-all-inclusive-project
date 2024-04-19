@@ -25,13 +25,13 @@ const QuoteDisplay: React.FC = () => {
 
   return (
     <div className='quote-display-container'>
-      <h2>Random Quote</h2>
+      <h5>Random Quote</h5>
       {error ? (
         <p>{error}</p>
       ) : quote ? (
-        <div>
-          <p>{quote.content}</p>
-          <p>{quote.author}</p>
+        <div className='quote-text'>
+          <p className='quote-content'>"{quote.content}"</p>
+          <p className='quote-author'>{quote.author}</p>
         </div>
       ) : (
         <p>Loading...</p>
