@@ -5,7 +5,6 @@ import { format } from "date-fns";
 import { fetchCurrentWeather, fetch5DaysWeather } from "../../api/index";
 
 import downArrow96 from "../../assets/icons/downArrow96.png";
-import sun from "../../assets/icons/sun.png";
 import upArrow96 from "../../assets/icons/upArrow96.png";
 import location48 from "../../assets/icons/location48.png";
 
@@ -67,79 +66,84 @@ const WeatherDisplay: React.FC = () => {
 
   return (
     <div className="weather-display-container">
+      <h5>Weather Information</h5>
       <div className="current-weather-display-container">
-        <h2>Weather Information</h2>
-        {currentWeatherData !== null && forecastWeatherData !== null ? (
-          <div className="weather-info-container">
-            <div className="weather-icon-container">
-              <div>
-                <img
-                  src={`http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}.png`}
-                  alt="weather-icon"
-                  className="current-weather-icon"
-                />
-                <p className="weather-description">
-                  {currentWeatherData.weather[0].description
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")}
-                </p>
-
-                <div className="temp-details-container">
-                  <img
-                    src={upArrow96}
-                    alt="upArrow96"
-                    className="weather-forecast-up-arrow"
-                  />
-                  <p>{kelvinToCelcius(currentWeatherData.main.temp_max)}°C</p>
-                  <img
-                    src={downArrow96}
-                    alt="downArrow96"
-                    className="weather-forecast-down-arrow"
-                  />
-                  <p>{kelvinToCelcius(currentWeatherData.main.temp_min)} °C</p>
-                </div>
-              </div>
-            </div>
-            <div className="weather-details-container">
-              <div className="temp-container">
-                <p className="current-temp">
-                  {kelvinToCelcius(currentWeatherData.main.temp)} °C
-                </p>
-              </div>
-              <div className="location-icon-container">
-                <img
-                  src={location48}
-                  alt="location48"
-                  className="weather-location-icon"
-                />
-                <p className="current-location">{currentWeatherData.name}</p>
-              </div>
-            </div>
+        {error ? (
+          <div>
+            <p>Oops! Something went wrong:</p>
+            <p>{error}</p>
           </div>
         ) : (
-          <p>Loading...</p>
+          <>
+            {currentWeatherData !== null && forecastWeatherData !== null ? (
+              <div className="weather-info-container">
+                <div className="weather-icon-container">
+                  <div>
+                    <img
+                      src={`http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}.png`}
+                      alt="weather-icon"
+                      className="current-weather-icon"
+                    />
+                    <p className="weather-description">
+                      {currentWeatherData.weather[0].description
+                        .split(" ")
+                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(" ")}
+                    </p>
+
+                    <div className="temp-details-container">
+                      <img
+                        src={upArrow96}
+                        alt="upArrow96"
+                        className="weather-forecast-up-arrow"
+                      />
+                      <p>{kelvinToCelcius(currentWeatherData.main.temp_max)}°C</p>
+                      <img
+                        src={downArrow96}
+                        alt="downArrow96"
+                        className="weather-forecast-down-arrow"
+                      />
+                      <p>{kelvinToCelcius(currentWeatherData.main.temp_min)} °C</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="weather-details-container">
+                  <div className="temp-container">
+                    <p className="current-temp">
+                      {kelvinToCelcius(currentWeatherData.main.temp)} °C
+                    </p>
+                  </div>
+                  <div className="location-icon-container">
+                    <img
+                      src={location48}
+                      alt="location48"
+                      className="weather-location-icon"
+                    />
+                    <p className="current-location">{currentWeatherData.name}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
+
+            <div className="weather-three-hour-forecast-container">
+              {forecastWeatherData?.map((item: any, index: number) => (
+                <div key={index}>
+                  <div className="weather2">
+                    <p>{format(new Date(item.dt_txt), "h:mm a")}</p>
+                    <img
+                      src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+                      alt="weather-icon"
+                    />
+                    <p>{kelvinToCelcius(item.main.temp)} °C</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
-
-      {forecastWeatherData?.map((item: any, index: number) => (
-        <div
-          key={index}
-          className={`weather-three-hour-forecast-container ${
-            index === 0 ? "first-child" : ""
-          }`}
-          style={index === 0 ? { marginLeft: "90px" } : {}}
-        >
-          <div className="weather2">
-            <p>{format(new Date(item.dt_txt), "h:mm a")}</p>
-            <img
-              src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
-              alt="weather-icon"
-            />
-            <p>{kelvinToCelcius(item.main.temp)} °C</p>
-          </div>
-        </div>
-      ))}
     </div>
   );
 };
