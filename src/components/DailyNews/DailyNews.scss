@@ -1,0 +1,18 @@
+.daily-news-container {
+  background-color: rgba(245, 216, 235, 0.244);
+
+  h5 {
+    margin-left: 20px;
+  }
+
+  li {
+    color: black;
+    margin: 20px;
+
+    &:hover {
+      color: rgb(134, 17, 163);
+      font-weight: 500;
+      cursor: grab;
+    }
+  }
+}

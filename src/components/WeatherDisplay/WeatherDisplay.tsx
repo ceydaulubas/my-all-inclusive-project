@@ -55,7 +55,6 @@ const WeatherDisplay: React.FC = () => {
         setCurrentWeatherData(currentData);
         setForecastWeatherData(forecastData.list.slice(0, 5));
 
-        console.log(forecastData);
       } catch (error) {
         setError("Error fetching weather data");
       }
