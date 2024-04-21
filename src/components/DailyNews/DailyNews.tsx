@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchDailyNews ,fetchLocationData} from "../../api/index";
+import { fetchDailyNews, fetchLocationData } from "../../api/index";
 import "./DailyNews.scss";
 
 interface DailyNewsData {
@@ -8,11 +8,14 @@ interface DailyNewsData {
 }
 
 export const DailyNews: React.FC = () => {
-  const [dailyNewsData, setDailyNewsData] = useState<DailyNewsData[] | null>(null);
+  const [dailyNewsData, setDailyNewsData] = useState<DailyNewsData[] | null>(
+    null
+  );
   const [userLocation, setUserLocation] = useState<{
     latitude: number;
     longitude: number;
   } | null>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +31,7 @@ export const DailyNews: React.FC = () => {
           }
         );
       } catch (error) {
-        console.error("Error fetching daily news:", error);
+        setError("Error fetching daily news:" + error);
       }
     };
 
@@ -68,12 +71,31 @@ export const DailyNews: React.FC = () => {
   return (
     <div className="daily-news-container">
       <h5>Daily News</h5>
-      {dailyNewsData &&
-        dailyNewsData.map((article: any, index: number) => (
-          <div key={index}>
-            <li onClick={() => handleArticleClick(article.url)}>{article.title}</li>
-          </div>
-        ))}
+      {error ? (
+        <div>
+          <p>Oops! Something went wrong:</p>
+          <p>{error}</p>
+        </div>
+      ) : (
+        <>
+          {dailyNewsData ? (
+            <div>
+              <h5>Top 5 News</h5>
+              <ul>
+                {dailyNewsData.map((article: any, index: number) => (
+                  <div key={index}>
+                    <li onClick={() => handleArticleClick(article.url)}>
+                      {article.title}
+                    </li>
+                  </div>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </>
+      )}
     </div>
   );
 };
