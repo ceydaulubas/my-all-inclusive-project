@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import Header from './layout/Header/Header';
-import Login from './pages/Login/Login';
-import Home from './pages/Home/Home';
-import Navbar from './layout/Navbar/Navbar';
 
+// Import Pages
+import {Home, Login} from './pages/index'
+import {Header,Navbar } from './layout/index'
+
+// Import Redux Tools
 import type { RootState } from './redux/store'
 import { useSelector } from 'react-redux'
 
