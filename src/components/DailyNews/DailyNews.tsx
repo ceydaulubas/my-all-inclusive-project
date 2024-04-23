@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { fetchDailyNews, fetchLocationData } from "../../api/index";
 import "./DailyNews.scss";
 
-interface DailyNewsData {
-  title: string;
-  url: string;
-}
+// Import the interfaces
+import { DailyNewsData  } from '../../helper/interfaces';
 
 export const DailyNews: React.FC = () => {
   const [dailyNewsData, setDailyNewsData] = useState<DailyNewsData[] | null>(

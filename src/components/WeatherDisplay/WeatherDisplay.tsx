@@ -4,31 +4,16 @@ import { format } from "date-fns";
 // Import Api
 import { fetchCurrentWeather, fetch5DaysWeather } from "../../api/index";
 
-import downArrow96 from "../../assets/icons/downArrow96.png";
-import upArrow96 from "../../assets/icons/upArrow96.png";
-import location48 from "../../assets/icons/location48.png";
+import {downArrow96, upArrow96, location48} from "../../assets/icons/index"
 
 import "./WeatherDisplay.scss";
 
-interface WeatherData {
-  main: {
-    temp: number;
-    temp_max: number;
-    temp_min: number;
-  };
-  weather: {
-    description: string;
-    icon: string;
-  }[];
-  name: string;
-}
+// Import the interfaces
+import { WeatherData  } from '../../helper/interfaces';
 
 const WeatherDisplay: React.FC = () => {
-  const [currentWeatherData, setCurrentWeatherData] =
-    useState<WeatherData | null>(null);
-  const [forecastWeatherData, setForecastWeatherData] = useState<
-    number[] | null
-  >(null);
+  const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | null>(null);
+  const [forecastWeatherData, setForecastWeatherData] = useState<number[] | null>(null);
   const [error, setError] = useState<string>("");
 
   const kelvinToCelcius = (kelvin: number) => {

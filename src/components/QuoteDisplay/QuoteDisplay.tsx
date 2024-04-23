@@ -5,10 +5,9 @@ import { fetchRandomQuoteApi } from '../../api/fetchRandomQuoteApi';
 
 import './QuoteDisplay.scss';
 
-interface Quote {
-  content: string;
-  author: string;
-}
+// Import the interfaces
+import { Quote  } from '../../helper/interfaces';
+
 
 const QuoteDisplay: React.FC = () => {
   const quote = useSelector<RootState, Quote | null>((state) => state.quote.quote);
