@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Carousel } from "antd";
 import { format } from "date-fns";
 
 // Import Api
@@ -22,7 +23,7 @@ const RecipesDisplay: React.FC = () => {
     const fetchData = async () => {
       try {
         const data = await fetchRandomRecipesApi();
-        setRandomRecipesData(data);
+        setRandomRecipesData(data.recipes[0]);
         console.log(data);
       } catch (error) {
         setError("Error fetching random recipes data");
@@ -32,11 +33,26 @@ const RecipesDisplay: React.FC = () => {
     fetchData();
   }, []);
 
+  const renderSlides = () => {
+    if (!randomRecipesData || !randomRecipesData.extendedIngredients) return null;
+
+    return randomRecipesData.extendedIngredients.map((ingredient) => (
+      <div key={ingredient.id} className="slide">
+        <img src={ingredient.image} alt={ingredient.originalName} />
+        <p>{ingredient.originalName}</p>
+      </div>
+    ));
+  };
 
   return (
     <div className="recipes-display-container">
-      <h5>Recipes </h5>
-
+      <h5>Recipes</h5>
+      {error && <p>{error}</p>}
+      {randomRecipesData && (
+        <Carousel>
+          {renderSlides()}
+        </Carousel>
+      )}
     </div>
   );
 };
