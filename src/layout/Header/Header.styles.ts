@@ -1,57 +1,70 @@
-.header-container {
+import styled from "styled-components";
+import { devices } from "../../assets/statics/devices";
+
+export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #5b6560;
   height: 60px;
   width: 100%;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
+`;
 
-  .header-left {
-    margin-left: 80px;
+export const HeaderLeft = styled.div`
+  margin-left: 80px;
 
-    .header-logo {
-      width: 50px;
-      height: 50px;
-    }
+  .header-logo {
+    width: 50px;
+    height: 50px;
   }
 
-  .header-links {
-    display: flex;
-    align-items: center;
-    margin-right: 80px;
+  @media (${devices.tabletS}) {
+    margin-left: 20px;
   }
+`;
 
-  .header-links a {
+export const HeaderRight = styled.div``;
+
+export const HeaderLinks = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 80px;
+
+  a {
     margin-left: 20px;
     color: white;
     text-decoration: none;
   }
 
-  .header-badge-circle {
+  @media (${devices.tabletS}) {
+    margin-right: 20px;
+  }
+`;
+
+export const HeaderBadgeCircle = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  margin-left: 20px;
+  cursor: pointer;
+
+  .header-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: white;
-    margin-left: 20px;
-    cursor: pointer;
-
-    .header-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-
-    .header-initial {
-      color: #a1a7bc;
-      font-size: 20px;
-      font-weight: bold;
-      margin: 8px 3px;
-    }
   }
-}
 
-.header-profile-popup-container {
+  .header-initial {
+    color: #a1a7bc;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 8px 3px;
+  }
+`;
+
+export const HeaderProfilePopupContainer = styled.div`
   width: 250px;
   height: 350px;
   background-color: rgb(207, 233, 229);
@@ -126,28 +139,32 @@
     font-weight: bold;
     margin: 25px 10px;
   }
-}
+`;
 
-.language-popup-container {
+export const LanguagePopupContainer = styled.div`
   position: absolute;
   display: flex;
-  width: 200px;
+  width: 90px;
   height: 100px;
   background-color: rgb(225, 235, 234);
   top: 310px;
   right: 250px;
 
   .language-options {
-    p {
+    div {
       display: flex;
       justify-content: center;
       align-items: center;
-      // padding: 2px;
       margin: 20px 20px;
       color: #033929;
     }
-    p:hover {
+    div:hover {
       color: #9b9494;
     }
   }
-}
+  @media (${devices.tabletS}) {
+    top: 410px;
+    right: 160px;
+    border: 1px solid black;
+  }
+`;
