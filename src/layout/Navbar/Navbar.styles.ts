@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { DoubleLeftOutlined, DoubleRightOutlined} from "@ant-design/icons";
 import { devices } from "../../assets/statics/devices";
 
 export const NavbarContainer = styled.div<{ isOpen: boolean }>`
@@ -52,13 +52,13 @@ export const ToggleIcon = styled.div`
   cursor: pointer;
 `;
 
-export const BoldLeftOutlined = styled(ArrowLeftOutlined)`
+export const BoldLeftOutlined = styled(DoubleLeftOutlined)`
   font-size: 24px; 
   filter: drop-shadow(0 0 2px black);
   padding-left: 10px;
 `;
 
-export const RightIcon = styled(ArrowRightOutlined)`
+export const BoldRightIconOutlined = styled(DoubleRightOutlined)`
   font-size: 24px; 
   filter: drop-shadow(0 0 2px black);
   padding-left: 10px;

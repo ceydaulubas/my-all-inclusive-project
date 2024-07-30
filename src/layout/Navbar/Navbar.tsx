@@ -20,7 +20,7 @@ import {
   NavItemLink,
   ToggleIcon,
   BoldLeftOutlined,
-  RightIcon,
+  BoldRightIconOutlined,
 } from "./Navbar.styles";
 
 const Navbar: React.FC = () => {
@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
   return (
     <NavbarContainer isOpen={isNavbarOpen}>
       <ToggleIcon onClick={() => dispatch(togglePopup())}>
-        {isNavbarOpen ? <BoldLeftOutlined /> : <RightIcon />}
+        {isNavbarOpen ? <BoldLeftOutlined /> : <BoldRightIconOutlined />}
       </ToggleIcon>
       <NavItems>
         {navItems.map((item, index) => (
