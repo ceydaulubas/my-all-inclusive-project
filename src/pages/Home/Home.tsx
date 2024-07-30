@@ -5,16 +5,16 @@ import {
   DailyNews,
   RecipesDisplay,
 } from "../../components/index";
-import "./Home.scss";
+import { HomeContainer } from "./Home.styles";
 
 function Home() {
   return (
-    <div className="home">
+    <HomeContainer>
       <QuoteDisplay />
       <WeatherDisplay />
       <DailyNews />
       <RecipesDisplay />
-    </div>
+    </HomeContainer>
   );
 }
 
