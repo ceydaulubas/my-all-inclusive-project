@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = '300aad0f12534918b37c50f430ae98de';
+const API_KEY = process.env.REACT_APP_RECIPES_API_KEY;
 
 const fetchRandomRecipesApi = async () => {
   try {

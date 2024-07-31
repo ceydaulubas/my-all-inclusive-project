@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = '8e182be434f04bd0895f076d01fea0fd';
+const API_KEY = process.env.REACT_APP_DAILY_NEWS_API_KEY;
 
 const fetchDailyNews = async (countryCode:string) => {
   try {
