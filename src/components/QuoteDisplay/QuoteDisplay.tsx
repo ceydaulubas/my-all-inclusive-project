@@ -29,7 +29,7 @@ const QuoteDisplay: React.FC = () => {
         <p>{error}</p>
       ) : quote ? (
         <div className='quote-text'>
-          <p className='quote-content'>"{quote.content}"</p>
+          <p className='quote-content'>"{quote.quote}"</p>
           <p className='quote-author'>{quote.author}</p>
         </div>
       ) : (

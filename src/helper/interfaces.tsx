@@ -10,7 +10,7 @@ export interface DailyNewsData {
 }
 
 export interface Quote {
-  content: string;
+  quote: string;
   author: string;
 }
 
