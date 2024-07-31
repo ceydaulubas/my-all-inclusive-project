@@ -12,7 +12,7 @@ export const HomeContainer = styled.div`
   }
 
   @media (${devices.tablet}) {
-    .home > * {
+      & > * {
       width: 100%;
     }
   }
