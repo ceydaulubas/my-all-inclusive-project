@@ -26,3 +26,9 @@ export interface WeatherData {
   }[];
   name: string;
 }
+
+export interface BackgroundQuteImage {
+  id: number;
+  title: string;
+  url: string;
+}

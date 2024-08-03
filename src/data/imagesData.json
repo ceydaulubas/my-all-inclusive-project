@@ -1,0 +1,34 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "title": "Forest Image",
+      "url": "https://res.cloudinary.com/dxqyvjf5r/image/upload/v1722503373/my-all-inclusive-project/vecteezy_wildlife-elk-in-forest-nature-landscape-vector-illustration__pefclk.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Northlight",
+      "url": "https://res.cloudinary.com/dxqyvjf5r/image/upload/v1722503373/my-all-inclusive-project/Galaxy21_hqbhdw.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Moon and Sea",
+      "url": "https://res.cloudinary.com/dxqyvjf5r/image/upload/v1722503373/my-all-inclusive-project/ad05_u9uj_180727_m9bxs2.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Pinky Forest",
+      "url": "https://res.cloudinary.com/dxqyvjf5r/image/upload/v1722502716/my-all-inclusive-project/valley-landscape-aesthetic-mountains-gradient-background-6318x2633-4589_eo6xv3.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Orange Forest",
+      "url": "https://res.cloudinary.com/dxqyvjf5r/image/upload/v1722502715/my-all-inclusive-project/vecteezy_abstract-flat-desert-mountain-landscape-vector-background_23103479-1_npt8gd.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Grey Forest",
+      "url": "https://res.cloudinary.com/dxqyvjf5r/image/upload/v1722502714/my-all-inclusive-project/mountain_landscape9_generated_kpzjot.jpg"
+    }
+  ]
+}

@@ -19,6 +19,7 @@ export const NavbarContainer = styled.div<{ isOpen: boolean }>`
 
   @media (${devices.tablet})  {
     width: ${(props) => (props.isOpen ? "100%" : "50px")};
+      padding: 10px;
   }
 `;
 

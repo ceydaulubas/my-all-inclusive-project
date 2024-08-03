@@ -1,18 +1,48 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { fetchRandomQuoteApi } from '../../api/fetchRandomQuoteApi';
+import React, { useEffect, useState } from "react";
 
-import './QuoteDisplay.scss';
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/store";
+
+// Import the Api
+import { fetchRandomQuoteApi } from "../../api/fetchRandomQuoteApi";
+
+// Import the styled components
+import {
+  QuoteDisplayContainer,
+  QuoteHeader,
+  QuoteText,
+  QuoteContent,
+  QuoteAuthor,
+  StyledLoadingOutlined,
+} from "./QuoteDisplay.styles";
 
 // Import the interfaces
-import { Quote  } from '../../helper/interfaces';
+import { Quote } from "../../helper/interfaces";
+import imagesData from "../../data/imagesData.json";
 
+import { BackgroundQuteImage } from "../../helper/interfaces";
+
+import { LoadingOutlined } from "@ant-design/icons";
+import { Flex, Spin } from "antd";
 
 const QuoteDisplay: React.FC = () => {
-  const quote = useSelector<RootState, Quote | null>((state) => state.quote.quote);
+  const quote = useSelector<RootState, Quote | null>(
+    (state) => state.quote.quote
+  );
   const error = useSelector((state: RootState) => state.quote.error);
   const dispatch = useDispatch();
+
+  // Local State
+  const [backgroundImage, setBackgroundImage] = useState<string>("");
+
+  useEffect(() => {
+    const imageArray: BackgroundQuteImage[] = imagesData.images;
+    const randomImage =
+      imageArray[Math.floor(Math.random() * imageArray.length)].url;
+
+    setBackgroundImage(randomImage);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,19 +53,24 @@ const QuoteDisplay: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div className='quote-display-container'>
-      <h5>Random Quote</h5>
+    <QuoteDisplayContainer backgroundImage={backgroundImage}>
+      <QuoteHeader>Random Quote</QuoteHeader>
       {error ? (
-        <p>{error}</p>
+        <QuoteText>
+          <QuoteContent>
+            "Whoever is happy will make others happy too."
+          </QuoteContent>
+          <QuoteAuthor>Anne Frank</QuoteAuthor>
+        </QuoteText>
       ) : quote ? (
-        <div className='quote-text'>
-          <p className='quote-content'>"{quote.quote}"</p>
-          <p className='quote-author'>{quote.author}</p>
-        </div>
+        <QuoteText>
+          <QuoteContent>"{quote.quote}"</QuoteContent>
+          <QuoteAuthor>{quote.author}</QuoteAuthor>
+        </QuoteText>
       ) : (
-        <p>Loading...</p>
+        <StyledLoadingOutlined spin />
       )}
-    </div>
+    </QuoteDisplayContainer>
   );
 };
 

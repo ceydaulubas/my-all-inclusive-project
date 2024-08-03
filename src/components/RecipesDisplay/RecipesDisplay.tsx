@@ -24,7 +24,6 @@ const RecipesDisplay: React.FC = () => {
       try {
         const data = await fetchRandomRecipesApi();
         setRandomRecipesData(data.recipes[0]);
-        console.log(data);
       } catch (error) {
         setError("Error fetching random recipes data");
       }
