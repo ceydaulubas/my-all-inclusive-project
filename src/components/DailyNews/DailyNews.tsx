@@ -68,7 +68,7 @@ export const DailyNews: React.FC = () => {
 
   return (
     <div className="daily-news-container">
-      <h5>Daily News</h5>
+      <h5>Local Daily News</h5>
       {error ? (
         <div>
           <p>Oops! Something went wrong:</p>

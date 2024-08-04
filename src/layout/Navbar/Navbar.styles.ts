@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { DoubleLeftOutlined, DoubleRightOutlined} from "@ant-design/icons";
+import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 import { devices } from "../../assets/statics/devices";
 
 export const NavbarContainer = styled.div<{ isOpen: boolean }>`
@@ -16,10 +16,11 @@ export const NavbarContainer = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  overflow-y: hidden;
 
-  @media (${devices.tablet})  {
+  @media (${devices.tablet}) {
     width: ${(props) => (props.isOpen ? "100%" : "50px")};
-      padding: 10px;
+    padding: 10px;
   }
 `;
 
@@ -54,13 +55,13 @@ export const ToggleIcon = styled.div`
 `;
 
 export const BoldLeftOutlined = styled(DoubleLeftOutlined)`
-  font-size: 24px; 
+  font-size: 24px;
   filter: drop-shadow(0 0 2px black);
   padding-left: 10px;
 `;
 
 export const BoldRightIconOutlined = styled(DoubleRightOutlined)`
-  font-size: 24px; 
+  font-size: 24px;
   filter: drop-shadow(0 0 2px black);
   padding-left: 10px;
 `;
