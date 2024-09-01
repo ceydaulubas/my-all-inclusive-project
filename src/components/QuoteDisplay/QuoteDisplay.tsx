@@ -23,8 +23,6 @@ import imagesData from "../../data/imagesData.json";
 
 import { BackgroundQuteImage } from "../../helper/interfaces";
 
-import { LoadingOutlined } from "@ant-design/icons";
-import { Flex, Spin } from "antd";
 
 const QuoteDisplay: React.FC = () => {
   const quote = useSelector<RootState, Quote | null>(

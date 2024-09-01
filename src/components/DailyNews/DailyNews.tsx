@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { fetchDailyNews, fetchLocationData } from "../../api/index";
-import "./DailyNews.scss";
 
 // Import the interfaces
 import { DailyNewsData  } from '../../helper/interfaces';
+
+// Import the styled components
+import {
+  DailyNewsContainer,
+  DailyNewsHeader,
+  DailyNewsList,
+  StyledLoadingOutlined
+} from "./DailyNews.styles";
+
 
 export const DailyNews: React.FC = () => {
   const [dailyNewsData, setDailyNewsData] = useState<DailyNewsData[] | null>(
@@ -67,8 +75,8 @@ export const DailyNews: React.FC = () => {
   };
 
   return (
-    <div className="daily-news-container">
-      <h5>Local Daily News</h5>
+    <DailyNewsContainer>
+      <DailyNewsHeader>Local Daily News</DailyNewsHeader>
       {error ? (
         <div>
           <p>Oops! Something went wrong:</p>
@@ -82,18 +90,18 @@ export const DailyNews: React.FC = () => {
               <ul>
                 {dailyNewsData.map((article: any, index: number) => (
                   <div key={index}>
-                    <li onClick={() => handleArticleClick(article.url)}>
+                    <DailyNewsList onClick={() => handleArticleClick(article.url)}>
                       {article.title}
-                    </li>
+                    </DailyNewsList>
                   </div>
                 ))}
               </ul>
             </div>
           ) : (
-            <p>Loading...</p>
+            <StyledLoadingOutlined spin />
           )}
         </>
       )}
-    </div>
+    </DailyNewsContainer>
   );
 };

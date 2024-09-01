@@ -10,7 +10,7 @@ import { WeatherDisplayContainer, WeatherHeader ,
   CurrentWeatherDisplayContainer,WeatherInfoContainer, WeatherIconContainer, 
   CurrentWeatherIcon, WeatherDescription, WeatherThreeHoursForecastContainer, Weather2,
   TempDetailContainer, WeatherForecasArrow, WeatherDetailsContainer,
-  CurrentTemp,WeatherLocationIconContainer, WeatherLocationIcon, CurrentLocation} from "./WeatherDisplay.styles";
+  CurrentTemp,WeatherLocationIconContainer, WeatherLocationIcon, CurrentLocation,StyledLoadingOutlined} from "./WeatherDisplay.styles";
 
 // Import the interfaces
 import { WeatherData  } from '../../helper/interfaces';
@@ -95,7 +95,7 @@ const WeatherDisplay: React.FC = () => {
                 </WeatherDetailsContainer>
               </WeatherInfoContainer>
             ) : (
-              <p>Loading...</p>
+              <StyledLoadingOutlined spin />
             )}
 
             <WeatherThreeHoursForecastContainer>

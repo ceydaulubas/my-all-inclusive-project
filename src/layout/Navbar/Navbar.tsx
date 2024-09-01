@@ -21,6 +21,7 @@ import {
   ToggleIcon,
   BoldLeftOutlined,
   BoldRightIconOutlined,
+  NavbarContent,
 } from "./Navbar.styles";
 
 const Navbar: React.FC = () => {
@@ -91,23 +92,26 @@ const Navbar: React.FC = () => {
 
   return (
     <NavbarContainer isOpen={isNavbarOpen}>
-      <ToggleIcon onClick={() => dispatch(togglePopup())}>
-        {isNavbarOpen ? <BoldLeftOutlined /> : <BoldRightIconOutlined />}
-      </ToggleIcon>
-      <NavItems>
-        {navItems.map((item, index) => (
-          <NavItemLink
-            key={index}
-            to={item.path}
-            onClick={() => handleLinkClick(item.path)}
-          >
-            {item.icon}
-            {isNavbarOpen && <span>{item.title}</span>}
-          </NavItemLink>
-        ))}
-      </NavItems>
+      <NavbarContent>
+        <ToggleIcon onClick={() => dispatch(togglePopup())}>
+          {isNavbarOpen ? <BoldLeftOutlined /> : <BoldRightIconOutlined />}
+        </ToggleIcon>
+        <NavItems>
+          {navItems.map((item, index) => (
+            <NavItemLink
+              key={index}
+              to={item.path}
+              onClick={() => handleLinkClick(item.path)}
+            >
+              {item.icon}
+              {isNavbarOpen && <span>{item.title}</span>}
+            </NavItemLink>
+          ))}
+        </NavItems>
+      </NavbarContent>
     </NavbarContainer>
   );
+  
 };
 
 export default Navbar;

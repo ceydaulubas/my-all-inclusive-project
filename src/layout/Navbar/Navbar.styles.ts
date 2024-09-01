@@ -7,20 +7,21 @@ export const NavbarContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
   left: 0;
   top: 60px;
-  z-index: 1000;
   height: calc(100vh - 60px);
   width: ${(props) => (props.isOpen ? "200px" : "50px")};
   background-color: rgb(177, 190, 199);
-  padding: 20px;
+  padding: 10px;
   transition: width 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   overflow-y: hidden;
+padding-top: 25px;
 
   @media (${devices.tablet}) {
     width: ${(props) => (props.isOpen ? "100%" : "50px")};
-    padding: 10px;
+
+
   }
 `;
 
@@ -64,4 +65,15 @@ export const BoldRightIconOutlined = styled(DoubleRightOutlined)`
   font-size: 24px;
   filter: drop-shadow(0 0 2px black);
   padding-left: 10px;
+`;
+
+
+export const NavbarContent = styled.div`
+  height: calc(100vh - 60px);
+  background-color: inherit;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: hidden;
 `;

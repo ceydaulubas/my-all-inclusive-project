@@ -9,6 +9,10 @@ export const HeaderContainer = styled.div`
   height: 60px;
   width: 100%;
   margin-bottom: 20px;
+  z-index: 10000;
+  position: fixed;
+  top: 0; 
+  left: 0;
 `;
 
 export const HeaderLeft = styled.div`

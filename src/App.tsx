@@ -1,33 +1,15 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css';
-
-// Import Pages
-import {Home, Login} from './pages/index'
-import {Header,Navbar } from './layout/index'
-
-// Import Redux Tools
-import type { RootState } from './redux/store'
-import { useSelector } from 'react-redux'
+import React from "react";
+import "./App.css";
+import Router from "./Router";
+import Header from "./layout/Header/Header";
 
 const App = () => {
-
-  const isNavbarOpen = useSelector((state: RootState) => state.navbarPopup.isOpen);
-
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Header />
-        <div className={`content-container ${isNavbarOpen ? 'navbar-open' : ''}`}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </div>
-        <Navbar/>
-      </BrowserRouter>
-    </div>
+    <>
+      <Header />
+      <Router />
+    </>
   );
-}
+};
 
 export default App;

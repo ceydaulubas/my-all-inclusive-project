@@ -1,9 +1,10 @@
-/* App.scss */
+
 
 .content-container {
   transition: margin-left 0.3s ease;
-  margin-left: 100px; /* Navbar kapalıyken içeriğin sol kenara 50px margin ekleyin */
+  margin-left: 80px; 
   margin-right: 10px;
+  
 }
 
 .content-container.navbar-open {
