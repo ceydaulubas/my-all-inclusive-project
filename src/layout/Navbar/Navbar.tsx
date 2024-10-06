@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   ShoppingCartOutlined,
   ScheduleOutlined,
@@ -29,7 +29,6 @@ const Navbar: React.FC = () => {
     (state: RootState) => state.navbarPopup.isOpen
   );
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const iconSize = "22px";
 
@@ -37,14 +36,6 @@ const Navbar: React.FC = () => {
     return React.cloneElement(icon, {
       style: { fontSize: iconSize, color: "#555" },
     });
-  };
-
-  const handleLinkClick = (path: string) => {
-    // Navigate to the path
-    navigate(path);
-
-    // Close the Navbar
-    dispatch(togglePopup());
   };
 
   const navItems: NavItem[] = [
@@ -100,8 +91,10 @@ const Navbar: React.FC = () => {
           {navItems.map((item, index) => (
             <NavItemLink
               key={index}
+              as={NavLink} // Use NavLink for navigation
               to={item.path}
-              onClick={() => handleLinkClick(item.path)}
+              className={({ isActive }) => (isActive ? 'active-link' : '')} 
+              onClick={() => dispatch(togglePopup())} 
             >
               {item.icon}
               {isNavbarOpen && <span>{item.title}</span>}
@@ -111,7 +104,6 @@ const Navbar: React.FC = () => {
       </NavbarContent>
     </NavbarContainer>
   );
-  
 };
 
 export default Navbar;

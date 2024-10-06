@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom"; 
+
 import {
   UserOutlined,
   GlobalOutlined,
   LogoutOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-
 import logo from "../../assets/images/logo.png";
 import {
   HeaderContainer,
@@ -69,8 +70,8 @@ function Header() {
       </HeaderLeft>
       <HeaderRight>
         <HeaderLinks>
-          <a href="/">Home</a>
-          <a href="/login">Login</a>
+          <Link to="/">Home</Link>  
+          <Link to="/login">Login</Link>  
           <HeaderBadgeCircle>
             <p className="header-initial" onClick={toggleProfilePopup}>
               CU
@@ -85,14 +86,14 @@ function Header() {
                 </div>
                 <div className="popup-options">
                   <h3>Ceyda Uubas</h3>
-                  <a href="/" className="header-popup-option">
+                  <Link to="/" className="header-popup-option">
                     <UserOutlined className="header-popup-icon" />
                     Edit my Profile
-                  </a>
-                  <a href="/" className="header-popup-option">
+                  </Link>
+                  <Link to="/" className="header-popup-option">
                     <LogoutOutlined className="header-popup-icon" />
                     Logout
-                  </a>
+                  </Link>
                   <div className="header-language-part-container">
                     <p onClick={toggleLanguagePopup}>
                       <GlobalOutlined className="header-popup-icon" />
