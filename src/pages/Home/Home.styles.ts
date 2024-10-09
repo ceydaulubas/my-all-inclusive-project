@@ -5,7 +5,6 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 80px;
 
   & > * {
     width: calc(50% - 10px);
