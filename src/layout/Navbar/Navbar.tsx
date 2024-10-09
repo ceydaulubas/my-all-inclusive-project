@@ -55,9 +55,9 @@ const Navbar: React.FC = () => {
       path: "/tasks",
     },
     {
-      title: "Recipes",
+      title: "Cookbook",
       icon: getIconWithSize(<PlusOutlined />),
-      path: "/recipes",
+      path: "/cookbook",
     },
     {
       title: "Meal Plan",

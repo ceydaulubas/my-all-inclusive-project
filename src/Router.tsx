@@ -6,7 +6,7 @@ import Navbar from './layout/Navbar/Navbar';
 import { Header } from './layout';
 import './App.css';
 
-import { ShoopingList } from './pages';
+import { ShoopingList, Cookbook } from './pages';
 
 
 // Lazy-loaded pages
@@ -64,6 +64,14 @@ const routeDefinitions = [
         element: (
           <Suspense fallback={<div>Loading...</div>}>
             <ShoopingList />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/cookbook',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Cookbook />
           </Suspense>
         ),
       },
