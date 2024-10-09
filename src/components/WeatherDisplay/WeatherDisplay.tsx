@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { format } from "date-fns";
 
 // Import Api
 import { fetchCurrentWeather, fetch5DaysWeather } from "../../api/index";
 
-import {downArrow96, upArrow96, location48} from "../../assets/icons/index"
+import {location48} from "../../assets/icons/index"
 
 import { WeatherDisplayContainer, WeatherHeader , 
   CurrentWeatherDisplayContainer,WeatherInfoContainer, WeatherIconContainer, 
   CurrentWeatherIcon, WeatherDescription, WeatherThreeHoursForecastContainer, Weather2,
-  TempDetailContainer, WeatherForecasArrow, WeatherDetailsContainer,
-  CurrentTemp,WeatherLocationIconContainer, WeatherLocationIcon, CurrentLocation,StyledLoadingOutlined} from "./WeatherDisplay.styles";
+  WeatherDetailsContainer, CurrentTemp,WeatherLocationIconContainer, WeatherLocationIcon, CurrentLocation,StyledLoadingOutlined} from "./WeatherDisplay.styles";
 
 // Import the interfaces
 import { WeatherData  } from '../../helper/interfaces';
@@ -24,33 +23,34 @@ const WeatherDisplay: React.FC = () => {
     return (kelvin - 273.15).toFixed(0);
   };
 
+  // useCallback to memoize the fetchData function
+  const fetchData = useCallback(async () => {
+    try {
+      const getPosition = () => {
+        return new Promise<GeolocationPosition>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+      };
+
+      const position = await getPosition();
+      const { latitude, longitude } = position.coords;
+
+      const [currentData, forecastData] = await Promise.all([
+        fetchCurrentWeather(latitude, longitude),
+        fetch5DaysWeather(latitude, longitude),
+      ]);
+
+      setCurrentWeatherData(currentData);
+      setForecastWeatherData(forecastData.list.slice(0, 5));
+
+    } catch (error) {
+      setError("Error fetching weather data");
+    }
+  }, []); // Empty dependency array means the function won't change unless the dependencies change.
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const getPosition = () => {
-          return new Promise<GeolocationPosition>((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
-          });
-        };
-
-        const position = await getPosition();
-        const { latitude, longitude } = position.coords;
-
-        const [currentData, forecastData] = await Promise.all([
-          fetchCurrentWeather(latitude, longitude),
-          fetch5DaysWeather(latitude, longitude),
-        ]);
-
-        setCurrentWeatherData(currentData);
-        setForecastWeatherData(forecastData.list.slice(0, 5));
-
-      } catch (error) {
-        setError("Error fetching weather data");
-      }
-    };
-
     fetchData();
-  }, []);
+  }, [fetchData]); // fetchData is added as a dependency, so it will only re-run if fetchData changes.
 
   return (
     <WeatherDisplayContainer>
