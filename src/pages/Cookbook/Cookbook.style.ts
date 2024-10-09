@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CookBookContainer = styled.div`
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 
-  background-color: blue;
+    background-color: blue;
 
-  color: red;
+    color: red;
 `;

@@ -1,4 +1,4 @@
-import Navbar from "./Navbar/Navbar";
-import Header from "./Header/Header";
+import Navbar from './Navbar/Navbar';
+import Header from './Header/Header';
 
-export {Navbar, Header};
+export { Navbar, Header };

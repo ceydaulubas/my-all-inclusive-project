@@ -1,28 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface quoteState {
-  quote: null,
-  error: null,
-  }
+    quote: null;
+    error: null;
+}
 
-  const initialState: quoteState = {
+const initialState: quoteState = {
     quote: null,
     error: null,
-  };
+};
 
-  export const quoteSlice = createSlice({
+export const quoteSlice = createSlice({
     name: 'quote',
     initialState,
     reducers: {
-      setQuote(state, action) {
-        state.quote = action.payload;
-        state.error = null;
-      },
-      setQuoteError(state, action) {
-        state.error = action.payload;
-      },
-    }
-  });
+        setQuote(state, action) {
+            state.quote = action.payload;
+            state.error = null;
+        },
+        setQuoteError(state, action) {
+            state.error = action.payload;
+        },
+    },
+});
 
 export const { setQuote, setQuoteError } = quoteSlice.actions;
 

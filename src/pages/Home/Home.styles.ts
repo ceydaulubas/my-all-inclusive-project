@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import { devices } from "../../assets/statics/devices";
+import styled from 'styled-components';
+import { devices } from '../../assets/statics/devices';
 
 export const HomeContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-  & > * {
-    width: calc(50% - 10px);
-    margin-bottom: 20px;
-  }
-
-  @media (${devices.tablet}) {
-      & > * {
-      width: 100%;
+    & > * {
+        width: calc(50% - 10px);
+        margin-bottom: 20px;
     }
-  }
+
+    @media (${devices.tablet}) {
+        & > * {
+            width: 100%;
+        }
+    }
 `;
