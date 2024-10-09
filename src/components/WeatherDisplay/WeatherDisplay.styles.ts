@@ -3,7 +3,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 export const WeatherDisplayContainer = styled.div`
   font-family: Arial, sans-serif;
-  background-color: rgba(72, 72, 78, 0.413);
+  background-color: rgba(0, 75, 125, 0.3);
 `;
 export const WeatherHeader = styled.h5`
   margin-left: 20px;
@@ -95,8 +95,7 @@ export const WeatherLocationIcon = styled.img`
   margin-bottom: 2px;
 `;
 
-export const CurrentLocation = styled.p`
-`;
+export const CurrentLocation = styled.p``;
 
 export const StyledLoadingOutlined = styled(LoadingOutlined)`
   font-size: 48px;
