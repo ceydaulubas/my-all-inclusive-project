@@ -1,13 +1,9 @@
+// components/QuoteDisplay.tsx
 import React, { useEffect, useState } from 'react';
-
-// Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
-
-// Import the Api
 import { fetchRandomQuoteApi } from '../../api/fetchRandomQuoteApi';
-
-// Import the styled components
+import imagesData from '../../data/imagesData.json';
 import {
     QuoteDisplayContainer,
     QuoteHeader,
@@ -16,12 +12,7 @@ import {
     QuoteAuthor,
     StyledLoadingOutlined,
 } from './QuoteDisplay.styles';
-
-// Import the interfaces
-import { Quote } from '../../helper/interfaces';
-import imagesData from '../../data/imagesData.json';
-
-import { BackgroundQuteImage } from '../../helper/interfaces';
+import { Quote, BackgroundQuteImage } from '../../helper/interfaces';
 
 const QuoteDisplay: React.FC = () => {
     const quote = useSelector<RootState, Quote | null>(
@@ -30,17 +21,17 @@ const QuoteDisplay: React.FC = () => {
     const error = useSelector((state: RootState) => state.quote.error);
     const dispatch = useDispatch();
 
-    // Local State
     const [backgroundImage, setBackgroundImage] = useState<string>('');
 
+    // Set random background image
     useEffect(() => {
         const imageArray: BackgroundQuteImage[] = imagesData.images;
         const randomImage =
             imageArray[Math.floor(Math.random() * imageArray.length)].url;
-
         setBackgroundImage(randomImage);
     }, []);
 
+    // Fetch random quote on component mount
     useEffect(() => {
         const fetchData = async () => {
             await fetchRandomQuoteApi(dispatch);
@@ -55,9 +46,9 @@ const QuoteDisplay: React.FC = () => {
             {error ? (
                 <QuoteText>
                     <QuoteContent>
-                        "Whoever is happy will make others happy too."
+                        "Believe you can and you're halfway there."
                     </QuoteContent>
-                    <QuoteAuthor>Anne Frank</QuoteAuthor>
+                    <QuoteAuthor>Theodore Roosevelt</QuoteAuthor>
                 </QuoteText>
             ) : quote ? (
                 <QuoteText>
