@@ -7,13 +7,4 @@ import upArrow48 from './upArrow48.png';
 import upArrow96 from './upArrow96.png';
 import user from './user.png';
 
-export {
-    downArrow48,
-    downArrow96,
-    location48,
-    location96,
-    sun,
-    upArrow48,
-    upArrow96,
-    user,
-};
+export { downArrow48, downArrow96, location48, location96, sun, upArrow48, upArrow96, user };

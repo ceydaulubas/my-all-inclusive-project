@@ -25,9 +25,7 @@ import {
 } from './Navbar.styles';
 
 const Navbar: React.FC = () => {
-    const isNavbarOpen = useSelector(
-        (state: RootState) => state.navbarPopup.isOpen
-    );
+    const isNavbarOpen = useSelector((state: RootState) => state.navbarPopup.isOpen);
     const dispatch = useDispatch();
 
     const iconSize = '22px';
@@ -85,11 +83,7 @@ const Navbar: React.FC = () => {
         <NavbarContainer isOpen={isNavbarOpen}>
             <NavbarContent>
                 <ToggleIcon onClick={() => dispatch(togglePopup())}>
-                    {isNavbarOpen ? (
-                        <BoldLeftOutlined />
-                    ) : (
-                        <BoldRightIconOutlined />
-                    )}
+                    {isNavbarOpen ? <BoldLeftOutlined /> : <BoldRightIconOutlined />}
                 </ToggleIcon>
                 <NavItems>
                     {navItems.map((item, index) => (
@@ -97,9 +91,7 @@ const Navbar: React.FC = () => {
                             key={index}
                             as={NavLink} // Use NavLink for navigation
                             to={item.path}
-                            className={({ isActive }) =>
-                                isActive ? 'active-link' : ''
-                            }
+                            className={({ isActive }) => (isActive ? 'active-link' : '')}
                             onClick={() => dispatch(togglePopup())}
                         >
                             {item.icon}

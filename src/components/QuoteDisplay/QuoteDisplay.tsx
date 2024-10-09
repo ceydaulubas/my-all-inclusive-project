@@ -15,9 +15,7 @@ import {
 import { Quote, BackgroundQuteImage } from '../../helper/interfaces';
 
 const QuoteDisplay: React.FC = () => {
-    const quote = useSelector<RootState, Quote | null>(
-        (state) => state.quote.quote
-    );
+    const quote = useSelector<RootState, Quote | null>((state) => state.quote.quote);
     const error = useSelector((state: RootState) => state.quote.error);
     const dispatch = useDispatch();
 
@@ -26,8 +24,7 @@ const QuoteDisplay: React.FC = () => {
     // Set random background image
     useEffect(() => {
         const imageArray: BackgroundQuteImage[] = imagesData.images;
-        const randomImage =
-            imageArray[Math.floor(Math.random() * imageArray.length)].url;
+        const randomImage = imageArray[Math.floor(Math.random() * imageArray.length)].url;
         setBackgroundImage(randomImage);
     }, []);
 
@@ -45,9 +42,7 @@ const QuoteDisplay: React.FC = () => {
             <QuoteHeader>Random Quote</QuoteHeader>
             {error ? (
                 <QuoteText>
-                    <QuoteContent>
-                        "Believe you can and you're halfway there."
-                    </QuoteContent>
+                    <QuoteContent>"Believe you can and you're halfway there."</QuoteContent>
                     <QuoteAuthor>Theodore Roosevelt</QuoteAuthor>
                 </QuoteText>
             ) : quote ? (

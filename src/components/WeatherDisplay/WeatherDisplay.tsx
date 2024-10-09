@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { format } from 'date-fns';
 
 // Import Api
 import { fetchCurrentWeather, fetch5DaysWeather } from '../../api/index';
 
 import { location48 } from '../../assets/icons/index';
+import { format } from 'date-fns';
 
 import {
     WeatherDisplayContainer,
@@ -28,11 +28,8 @@ import {
 import { WeatherData } from '../../helper/interfaces';
 
 const WeatherDisplay: React.FC = () => {
-    const [currentWeatherData, setCurrentWeatherData] =
-        useState<WeatherData | null>(null);
-    const [forecastWeatherData, setForecastWeatherData] = useState<
-        number[] | null
-    >(null);
+    const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | null>(null);
+    const [forecastWeatherData, setForecastWeatherData] = useState<number[] | null>(null);
     const [error, setError] = useState<string>('');
 
     const kelvinToCelcius = (kelvin: number) => {
@@ -78,8 +75,7 @@ const WeatherDisplay: React.FC = () => {
                     </div>
                 ) : (
                     <>
-                        {currentWeatherData !== null &&
-                        forecastWeatherData !== null ? (
+                        {currentWeatherData !== null && forecastWeatherData !== null ? (
                             <WeatherInfoContainer>
                                 <WeatherIconContainer>
                                     <CurrentWeatherIcon
@@ -92,29 +88,18 @@ const WeatherDisplay: React.FC = () => {
                                             .split(' ')
                                             .map(
                                                 (word) =>
-                                                    word
-                                                        .charAt(0)
-                                                        .toUpperCase() +
-                                                    word.slice(1)
+                                                    word.charAt(0).toUpperCase() + word.slice(1)
                                             )
                                             .join(' ')}
                                     </WeatherDescription>
                                 </WeatherIconContainer>
                                 <WeatherDetailsContainer>
                                     <CurrentTemp>
-                                        {kelvinToCelcius(
-                                            currentWeatherData.main.temp
-                                        )}{' '}
-                                        °C
+                                        {kelvinToCelcius(currentWeatherData.main.temp)} °C
                                     </CurrentTemp>
                                     <WeatherLocationIconContainer>
-                                        <WeatherLocationIcon
-                                            src={location48}
-                                            alt="location48"
-                                        />
-                                        <CurrentLocation>
-                                            {currentWeatherData.name}
-                                        </CurrentLocation>
+                                        <WeatherLocationIcon src={location48} alt="location48" />
+                                        <CurrentLocation>{currentWeatherData.name}</CurrentLocation>
                                     </WeatherLocationIconContainer>
                                 </WeatherDetailsContainer>
                             </WeatherInfoContainer>
@@ -123,30 +108,18 @@ const WeatherDisplay: React.FC = () => {
                         )}
 
                         <WeatherThreeHoursForecastContainer>
-                            {forecastWeatherData?.map(
-                                (item: any, index: number) => (
-                                    <div key={index}>
-                                        <Weather2>
-                                            <p>
-                                                {format(
-                                                    new Date(item.dt_txt),
-                                                    'h:mm a'
-                                                )}
-                                            </p>
-                                            <img
-                                                src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
-                                                alt="weather-icon"
-                                            />
-                                            <p>
-                                                {kelvinToCelcius(
-                                                    item.main.temp
-                                                )}{' '}
-                                                °C
-                                            </p>
-                                        </Weather2>
-                                    </div>
-                                )
-                            )}
+                            {forecastWeatherData?.map((item: any, index: number) => (
+                                <div key={index}>
+                                    <Weather2>
+                                        <p>{format(new Date(item.dt_txt), 'h:mm a')}</p>
+                                        <img
+                                            src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+                                            alt="weather-icon"
+                                        />
+                                        <p>{kelvinToCelcius(item.main.temp)} °C</p>
+                                    </Weather2>
+                                </div>
+                            ))}
                         </WeatherThreeHoursForecastContainer>
                     </>
                 )}

@@ -1,12 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-    UserOutlined,
-    GlobalOutlined,
-    LogoutOutlined,
-    RightOutlined,
-} from '@ant-design/icons';
+import { UserOutlined, GlobalOutlined, LogoutOutlined, RightOutlined } from '@ant-design/icons';
 import logo from '../../assets/images/logo.png';
 import {
     HeaderContainer,
@@ -73,10 +68,7 @@ function Header() {
                     <Link to="/">Home</Link>
                     <Link to="/login">Login</Link>
                     <HeaderBadgeCircle>
-                        <p
-                            className="header-initial"
-                            onClick={toggleProfilePopup}
-                        >
+                        <p className="header-initial" onClick={toggleProfilePopup}>
                             CU
                         </p>
 
@@ -89,17 +81,11 @@ function Header() {
                                 </div>
                                 <div className="popup-options">
                                     <h3>Ceyda Uubas</h3>
-                                    <Link
-                                        to="/"
-                                        className="header-popup-option"
-                                    >
+                                    <Link to="/" className="header-popup-option">
                                         <UserOutlined className="header-popup-icon" />
                                         Edit my Profile
                                     </Link>
-                                    <Link
-                                        to="/"
-                                        className="header-popup-option"
-                                    >
+                                    <Link to="/" className="header-popup-option">
                                         <LogoutOutlined className="header-popup-icon" />
                                         Logout
                                     </Link>
@@ -117,12 +103,8 @@ function Header() {
                         {isLanguagePopupOpen && (
                             <LanguagePopupContainer ref={languagePopupRef}>
                                 <div className="language-options">
-                                    <div onClick={() => selectLanguage(true)}>
-                                        English
-                                    </div>
-                                    <div onClick={() => selectLanguage(false)}>
-                                        Turkish
-                                    </div>
+                                    <div onClick={() => selectLanguage(true)}>English</div>
+                                    <div onClick={() => selectLanguage(false)}>Turkish</div>
                                 </div>
                             </LanguagePopupContainer>
                         )}

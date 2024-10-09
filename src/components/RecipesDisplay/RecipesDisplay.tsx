@@ -41,9 +41,7 @@ interface Recipe {
 }
 
 const RecipesDisplay: React.FC = () => {
-    const [randomRecipesData, setRandomRecipesData] = useState<Recipe[] | null>(
-        null
-    );
+    const [randomRecipesData, setRandomRecipesData] = useState<Recipe[] | null>(null);
     const [error, setError] = useState<string>('');
 
     useEffect(() => {

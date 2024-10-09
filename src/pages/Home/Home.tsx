@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    QuoteDisplay,
-    WeatherDisplay,
-    DailyNews,
-    RecipesDisplay,
-} from '../../components/index';
+import { QuoteDisplay, WeatherDisplay, DailyNews, RecipesDisplay } from '../../components/index';
 import { HomeContainer } from './Home.styles';
 
 function Home() {

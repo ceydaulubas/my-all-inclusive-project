@@ -13,9 +13,7 @@ const Home = React.lazy(() => import('./pages/Home/Home'));
 const Login = React.lazy(() => import('./pages/Login/Login'));
 
 const AppLayout: React.FC = () => {
-    const isNavbarOpen = useSelector(
-        (state: RootState) => state.navbarPopup.isOpen
-    );
+    const isNavbarOpen = useSelector((state: RootState) => state.navbarPopup.isOpen);
 
     console.log('isNavbarOpen', isNavbarOpen);
 
@@ -28,9 +26,7 @@ const AppLayout: React.FC = () => {
     };
 
     return (
-        <div
-            className={`app-container ${isNavbarOpen ? 'navbar-open' : 'navbar-closed'}`}
-        >
+        <div className={`app-container ${isNavbarOpen ? 'navbar-open' : 'navbar-closed'}`}>
             <Header />
             <Navbar />
             <div className="main-content" style={contentStyle}>

@@ -13,9 +13,7 @@ import {
 } from './DailyNews.styles';
 
 export const DailyNews: React.FC = () => {
-    const [dailyNewsData, setDailyNewsData] = useState<DailyNewsData[] | null>(
-        null
-    );
+    const [dailyNewsData, setDailyNewsData] = useState<DailyNewsData[] | null>(null);
     const [userLocation, setUserLocation] = useState<{
         latitude: number;
         longitude: number;
@@ -48,10 +46,7 @@ export const DailyNews: React.FC = () => {
             const fetchNewsByLocation = async () => {
                 try {
                     const { latitude, longitude } = userLocation;
-                    const locationData = await fetchLocationData(
-                        latitude,
-                        longitude
-                    );
+                    const locationData = await fetchLocationData(latitude, longitude);
                     const countryCode = locationData.countryCode.toLowerCase();
 
                     const data = await fetchDailyNews('us');
@@ -90,21 +85,15 @@ export const DailyNews: React.FC = () => {
                         <div>
                             <h5>Top 5 News</h5>
                             <ul>
-                                {dailyNewsData.map(
-                                    (article: any, index: number) => (
-                                        <div key={index}>
-                                            <DailyNewsList
-                                                onClick={() =>
-                                                    handleArticleClick(
-                                                        article.url
-                                                    )
-                                                }
-                                            >
-                                                {article.title}
-                                            </DailyNewsList>
-                                        </div>
-                                    )
-                                )}
+                                {dailyNewsData.map((article: any, index: number) => (
+                                    <div key={index}>
+                                        <DailyNewsList
+                                            onClick={() => handleArticleClick(article.url)}
+                                        >
+                                            {article.title}
+                                        </DailyNewsList>
+                                    </div>
+                                ))}
                             </ul>
                         </div>
                     ) : (
