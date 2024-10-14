@@ -5,7 +5,7 @@ const API_KEY = process.env.REACT_APP_RECIPES_API_KEY;
 const fetchRandomRecipesApi = async () => {
     try {
         const response = await axios.get(
-            `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=30`
+            `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&include-tags=dessert&number=30`
         );
         return response.data;
     } catch (error) {

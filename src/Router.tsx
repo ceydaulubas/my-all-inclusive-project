@@ -15,8 +15,6 @@ const Login = React.lazy(() => import('./pages/Login/Login'));
 const AppLayout: React.FC = () => {
     const isNavbarOpen = useSelector((state: RootState) => state.navbarPopup.isOpen);
 
-    console.log('isNavbarOpen', isNavbarOpen);
-
     // Define dynamic styles based on navbar state
     const contentStyle = {
         transition: 'margin-left 0.3s ease',

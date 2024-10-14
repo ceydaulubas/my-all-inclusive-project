@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
         {
             title: 'Overview',
             icon: getIconWithSize(<HomeOutlined />),
-            path: '/overview',
+            path: '/',
         },
         {
             title: 'Shopping List',
