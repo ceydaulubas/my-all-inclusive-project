@@ -38,7 +38,7 @@ const Cookbook = () => {
             style={{
                 backgroundColor: 'rgb(217, 217, 217)',
                 margin: '0 -20px 0 -20px',
-                height: '100vh',
+                height: '100%',
             }}
         >
             <CookbookContainerImage>
