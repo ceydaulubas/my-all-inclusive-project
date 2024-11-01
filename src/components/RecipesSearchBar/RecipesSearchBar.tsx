@@ -1,16 +1,22 @@
 import { useState } from 'react';
-import { Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { StyledInput } from './RecipesSearchBar.style';
+import { StyledInput, StyledForm, StyledButton } from './RecipesSearchBar.style';
 
 interface RecipesSearchBar {}
 
-const ComponentName = (props: RecipesSearchBar) => {
-    const [state, setstate] = useState();
-
+const RecipesSearchBar = (props: RecipesSearchBar) => {
     return (
-        <StyledInput size="large" placeholder="Search the recipes..." prefix={<SearchOutlined />} />
+        <>
+            <StyledForm>
+                <StyledInput
+                    size="large"
+                    placeholder="Search the recipes..."
+                    prefix={<SearchOutlined />}
+                />
+                <StyledButton>Search</StyledButton>
+            </StyledForm>
+        </>
     );
 };
 
-export default ComponentName;
+export default RecipesSearchBar;
