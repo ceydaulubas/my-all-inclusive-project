@@ -3,8 +3,8 @@ import { WeatherDisplay } from '../../components/index';
 
 function ShoopingList() {
     return (
-        <div className="ShoopingList">
-            <WeatherDisplay />
+        <div className="ShoopingList" style={{ marginTop: 80 }}>
+            ShoopingList
         </div>
     );
 }

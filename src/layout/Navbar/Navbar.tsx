@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
                     {navItems.map((item, index) => (
                         <NavItemLink
                             key={index}
-                            as={NavLink} // Use NavLink for navigation
+                            as={NavLink}
                             to={item.path}
                             className={({ isActive }) => (isActive ? 'active-link' : '')}
                             onClick={() => dispatch(togglePopup())}
