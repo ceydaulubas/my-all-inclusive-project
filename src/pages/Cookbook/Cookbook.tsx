@@ -1,9 +1,23 @@
 import { useEffect, useState } from 'react';
-import { CookBookContainer, CardImage, CookbookContainerImage } from './Cookbook.style';
-import { QuoteDisplay, RecipesSearchBar, RecipesFilter } from '../../components/index';
+import { RecipesSearchBar, RecipesFilter } from '../../components/index';
 
 // Import Api
 import { fetchRandomRecipesApi } from '../../api/index';
+
+// Import Icons
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { glutenFree, vegetarian, vegan } from '../../assets/index';
+
+// Import Styled Component
+import {
+    CookBookContainer,
+    CookbookCard,
+    CardImage,
+    CookbookContainerImage,
+    ImageWrapper,
+} from './Cookbook.style';
+
+// Import Ant design
 import { Card } from 'antd';
 const { Meta } = Card;
 
@@ -11,13 +25,18 @@ interface CookbookProps {
     id: number;
     title: string;
     image: string;
+    vegan: boolean;
+    vegetarian: boolean;
+    instructions: string;
+    sourceUrl: string;
+    glutenFree: boolean;
+    summary: string;
 }
 
 const Cookbook = () => {
     const [recipes, setRecipes] = useState<CookbookProps[] | null>(null);
     const [error, setError] = useState<string>('');
-    const [search, setSearch] = useState<string>('');
-    const [searchResults, setSearchResults] = useState<CookbookProps[] | null>(null);
+    const [favorites, setFavorites] = useState<number[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,6 +51,29 @@ const Cookbook = () => {
     }, []);
 
     console.log('recipes', recipes);
+
+    const stripHtml = (html: string) => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
+        return tempDiv.textContent || tempDiv.innerText || '';
+    };
+
+    const truncateText = (text: string, wordLimit: number) => {
+        const words = text.split(' ');
+        return words.length > wordLimit ? words.slice(0, wordLimit).join(' ') + '...' : text;
+    };
+
+    const toggleFavorite = (id: number) => {
+        setFavorites((prevFavorites) =>
+            prevFavorites.includes(id)
+                ? prevFavorites.filter((favId) => favId !== id)
+                : [...prevFavorites, id]
+        );
+    };
+
+    const handleRedirect = (url: string) => {
+        window.location.href = url;
+    };
 
     return (
         <div
@@ -50,10 +92,47 @@ const Cookbook = () => {
             <CookBookContainer>
                 {recipes &&
                     recipes.map((recipe: CookbookProps) => (
-                        <Card style={{ width: 300 }} key={recipe.id}>
-                            <CardImage src={recipe.image} alt={recipe.title} />
-                            <Meta title={recipe.title} description={recipe.title} />
-                        </Card>
+                        <CookbookCard
+                            key={recipe.id}
+                            cover={
+                                <ImageWrapper>
+                                    <CardImage
+                                        src={recipe.image}
+                                        alt={recipe.title}
+                                        onClick={() => handleRedirect(recipe.sourceUrl)}
+                                    />
+                                </ImageWrapper>
+                            }
+                            extra={
+                                favorites.includes(recipe.id) ? (
+                                    <HeartFilled
+                                        style={{ color: 'red', fontSize: 20 }}
+                                        onClick={() => toggleFavorite(recipe.id)}
+                                    />
+                                ) : (
+                                    <HeartOutlined
+                                        style={{ color: 'red', fontSize: 20 }}
+                                        onClick={() => toggleFavorite(recipe.id)}
+                                    />
+                                )
+                            }
+                            actions={[
+                                recipe.vegetarian ? (
+                                    <img style={{ width: 40 }} src={vegetarian} alt={vegetarian} />
+                                ) : null,
+                                recipe.vegan ? (
+                                    <img style={{ width: 40 }} src={vegan} alt={vegan} />
+                                ) : null,
+                                recipe.glutenFree ? (
+                                    <img style={{ width: 40 }} src={glutenFree} alt={glutenFree} />
+                                ) : null,
+                            ]}
+                        >
+                            <Meta
+                                title={recipe.title}
+                                description={truncateText(stripHtml(recipe.instructions), 10)}
+                            />
+                        </CookbookCard>
                     ))}
             </CookBookContainer>
         </div>
