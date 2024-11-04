@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { devices } from '../../assets/statics/devices';
+import { Table } from 'antd';
 
 export const PillListContainer = styled.div`
     display: flex;
@@ -16,5 +17,17 @@ export const PillListContainer = styled.div`
         & > * {
             width: 100%;
         }
+    }
+`;
+
+export const StyledTable = styled(Table)`
+    .ant-table-thead > tr > th {
+        background-color: #f0f0f0;
+    }
+    .ant-table-tbody > tr > td {
+        background-color: #ffffff;
+    }
+    .ant-table-tbody > tr:hover > td {
+        background-color: #e6f7ff;
     }
 `;

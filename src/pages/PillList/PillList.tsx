@@ -1,8 +1,21 @@
 import React from 'react';
-import { PillListContainer } from './PillList.styles';
+import { PillListTable, PillListForm } from '../../components/index';
+import { MailOutlined, FileAddOutlined, DownloadOutlined } from '@ant-design/icons';
 
-function PillList() {
-    return <PillListContainer> PillListContainer</PillListContainer>;
-}
+const PillList: React.FC = () => {
+    return (
+        <>
+            <PillListForm />
+            <div>
+                <FileAddOutlined />
+                <MailOutlined />
+                <DownloadOutlined />
+            </div>
+            <PillListTable />
+            
+            
+        </>
+    );
+};
 
 export default PillList;
