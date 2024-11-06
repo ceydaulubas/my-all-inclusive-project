@@ -97,7 +97,7 @@ const PillListTable: React.FC = () => {
             </div>
 
             {/* Table always seems */}
-            <Table dataSource={tableData} columns={columns} pagination={false} />
+            <Table dataSource={tableData} columns={columns} pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30']}}/>
 
             {/* Form inside of the modal*/}
             <Modal
