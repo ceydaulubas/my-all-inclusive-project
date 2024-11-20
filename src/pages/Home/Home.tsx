@@ -8,7 +8,7 @@ function Home() {
             <QuoteDisplay />
             <WeatherDisplay />
             <DailyNews />
-            {/* <RecipesDisplay /> */}
+            <RecipesDisplay />
         </HomeContainer>
     );
 }

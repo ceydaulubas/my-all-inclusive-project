@@ -1,38 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Slider } from 'react-styled-slider-component';
-import styled from 'styled-components';
+import useResponsiveSlides from '../../hooks/useResponsiveSlidesHook';
+
+import { RecipesDisplayContainer } from './RecipesDisplay.styles';
 
 // Import Api
 import { fetchRandomRecipesApi } from '../../api/index';
-
-// Styled Components
-const RecipesDisplayContainer = styled.div`
-    background-color: rgb(248, 243, 243);
-
-    h5 {
-        margin-left: 20px;
-    }
-`;
-
-const Slide = styled.div`
-    padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers the content horizontally */
-    justify-content: center; /* Centers the content vertically */
-    height: 150px; /* Set a fixed height for the slide */
-
-    img {
-        width: 200px; /* Adjust the image size as needed */
-        height: 500px; /* Ensure the aspect ratio of the image is preserved */
-    }
-
-    p {
-        margin-top: 10px; /* Space between image and text */
-        font-size: 16px; /* Adjust the font size */
-        padding-bottom: 90px;
-    }
-`;
 
 interface Recipe {
     id: number;
@@ -43,6 +16,7 @@ interface Recipe {
 const RecipesDisplay: React.FC = () => {
     const [randomRecipesData, setRandomRecipesData] = useState<Recipe[] | null>(null);
     const [error, setError] = useState<string>('');
+    const visibleSlides = useResponsiveSlides();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,10 +37,14 @@ const RecipesDisplay: React.FC = () => {
         console.log('randomRecipesData', randomRecipesData);
 
         return randomRecipesData.map((recipe: Recipe) => (
-            <Slide key={recipe.id}>
-                <img src={recipe?.image} alt={recipe.title} />
+            <div key={recipe.id}>
+                <img
+                    src={recipe?.image}
+                    alt={recipe.title}
+                    style={{ objectFit: 'fill', height: '300px', width: '300px' }}
+                />
                 <p>{recipe.title}</p>
-            </Slide>
+            </div>
         ));
     };
 
@@ -74,10 +52,10 @@ const RecipesDisplay: React.FC = () => {
         <RecipesDisplayContainer>
             <h5>Recipes</h5>
             {error && <p>{error}</p>}
-            {randomRecipesData && (
+            {randomRecipesData ? (
                 <Slider
-                    visibleSlides={3}
-                    showDots={true}
+                    visibleSlides={visibleSlides}
+                    showDots={false}
                     showArrows={true}
                     dotsPosition="bottom"
                     slideStep={1}
@@ -85,6 +63,17 @@ const RecipesDisplay: React.FC = () => {
                     arrowStyle="filled"
                 >
                     {renderSlides()}
+                </Slider>
+            ) : (
+                <Slider>
+                    <div style={{ backgroundColor: 'red', height: '200px' }}>Slide 1</div>
+                    <div style={{ backgroundColor: 'blue', height: '200px' }}>Slide 2</div>
+                    <div style={{ backgroundColor: 'green', height: '200px' }}>Slide 3</div>
+                    <div style={{ backgroundColor: 'yellow', height: '200px' }}>Slide 4</div>
+                    <div style={{ backgroundColor: 'red', height: '200px' }}>Slide 5</div>
+                    <div style={{ backgroundColor: 'blue', height: '200px' }}>Slide 6</div>
+                    <div style={{ backgroundColor: 'green', height: '200px' }}>Slide 7</div>
+                    <div style={{ backgroundColor: 'yellow', height: '200px' }}>Slide 8</div>
                 </Slider>
             )}
         </RecipesDisplayContainer>
