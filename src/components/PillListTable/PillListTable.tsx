@@ -33,7 +33,15 @@ const PillListTable: React.FC = () => {
     };
 
     const handleDelete = (key: React.Key) => {
-        dispatch(deletePillData(key));
+
+        // Show the modal before deleting the data
+        Modal.confirm({
+            title: 'Are you sure you want to delete this data?',
+            onOk: () => {
+                dispatch(deletePillData(key));
+            },
+        });
+ 
     };
 
     const handleDownload = () => {
