@@ -5,6 +5,7 @@ import { fetchCurrentWeather, fetch5DaysWeather } from '../../api/index';
 
 import { location48 } from '../../assets/icons/index';
 import { format } from 'date-fns';
+import { weatherConditionsImage } from '../../assets/common/links';
 
 import {
     WeatherDisplayContainer,
@@ -30,10 +31,49 @@ import { WeatherData } from '../../helper/interfaces';
 const WeatherDisplay: React.FC = () => {
     const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | null>(null);
     const [forecastWeatherData, setForecastWeatherData] = useState<number[] | null>(null);
+    const [backgroundImage, setBackgroundImage] = useState<string>('');
     const [error, setError] = useState<string>('');
+    const [isDay, setIsDay] = useState<boolean>(true);
 
     const kelvinToCelcius = (kelvin: number) => {
         return (kelvin - 273.15).toFixed(0);
+    };
+
+    // Function to determine the background image based on the current weather and time of day
+    const getBackgroundImage = (condition: string, hour: number): string => {
+        const isDaytime = hour > 6 && hour < 18;
+        setIsDay(isDaytime);
+
+        let imageKey: keyof typeof weatherConditionsImage;
+
+        switch (condition) {
+            case 'Clear':
+            case 'few clouds':
+            case 'Clouds':
+                imageKey = isDaytime ? 'clearMorning' : 'clearNight';
+                break;
+            case 'scattered clouds':
+                imageKey = isDaytime ? 'scatteredCloudsMorning' : 'scatteredCloudsNight';
+                break;
+            case 'Drizzle':
+            case 'Rain':
+                imageKey = isDaytime ? 'rainMorning' : 'rainNight';
+                break;
+            case 'Thunderstorm':
+                imageKey = isDaytime ? 'thunderstormMorning' : 'thunderstormNight';
+                break;
+            case 'Snow':
+                imageKey = isDaytime ? 'snowMorning' : 'snowNight';
+                break;
+            case 'Mist':
+                imageKey = isDaytime ? 'mistMorning' : 'mistNight';
+                break;
+            default:
+                imageKey = isDaytime ? 'clearMorning' : 'clearNight';
+                break;
+        }
+
+        return `url(${weatherConditionsImage[imageKey]})`;
     };
 
     // useCallback to memoize the fetchData function
@@ -55,6 +95,12 @@ const WeatherDisplay: React.FC = () => {
 
             setCurrentWeatherData(currentData);
             setForecastWeatherData(forecastData.list.slice(0, 5));
+
+            // Determine the background image based on the current weather
+            const condition = currentData.weather[0].main;
+            const localHour = new Date().getHours();
+            const background = getBackgroundImage(condition, localHour);
+            setBackgroundImage(background);
         } catch (error) {
             setError('Error fetching weather data');
         }
@@ -65,7 +111,7 @@ const WeatherDisplay: React.FC = () => {
     }, [fetchData]); // fetchData is added as a dependency, so it will only re-run if fetchData changes.
 
     return (
-        <WeatherDisplayContainer>
+        <WeatherDisplayContainer style={{ backgroundImage }} isDay={isDay}>
             <WeatherHeader>Weather Information</WeatherHeader>
             <CurrentWeatherDisplayContainer>
                 {error ? (

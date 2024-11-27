@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { LoadingOutlined } from '@ant-design/icons';
 
-export const WeatherDisplayContainer = styled.div`
+export const WeatherDisplayContainer = styled.div<{ isDay: boolean }>`
     font-family: Arial, sans-serif;
-    background-color: rgba(72, 72, 78, 0.413);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: ${({ isDay }) => (isDay ? 'black' : 'white')}; 
+
 `;
 export const WeatherHeader = styled.h5`
     margin-left: 20px;
@@ -75,12 +79,11 @@ export const WeatherDetailsContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: -40px;
 `;
 
 export const CurrentTemp = styled.p`
     font-weight: 500;
-    font-size: 1.5rem;
+    font-size: 3rem;
     margin-top: 4.3rem;
 `;
 
@@ -90,12 +93,13 @@ export const WeatherLocationIconContainer = styled.div`
 `;
 
 export const WeatherLocationIcon = styled.img`
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin-bottom: 2px;
 `;
 
-export const CurrentLocation = styled.p``;
+export const CurrentLocation = styled.p`
+`;
 
 export const StyledLoadingOutlined = styled(LoadingOutlined)`
     font-size: 48px;

@@ -1,4 +1,18 @@
-export const weatherConditionsImage = {
+export const weatherConditionsImage: {
+    [key in
+        | 'clearMorning'
+        | 'clearNight'
+        | 'scatteredCloudsMorning'
+        | 'scatteredCloudsNight'
+        | 'rainMorning'
+        | 'rainNight'
+        | 'thunderstormMorning'
+        | 'thunderstormNight'
+        | 'snowMorning'
+        | 'snowNight'
+        | 'mistMorning'
+        | 'mistNight']: string;
+} = {
     clearMorning:
         'https://res.cloudinary.com/dxqyvjf5r/image/upload/v1732564436/weather_condition_background_images/alex-machado-80sv993lUKI-unsplash_nprd93.jpg',
     clearNight:
