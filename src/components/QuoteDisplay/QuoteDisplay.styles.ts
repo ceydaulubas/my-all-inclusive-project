@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { LoadingOutlined } from '@ant-design/icons';
 
 export const QuoteDisplayContainer = styled.div<{ backgroundImage: string }>`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-image: url(${(props) => props.backgroundImage});
     background-position: center;
     background-size: cover;
@@ -34,14 +38,4 @@ export const QuoteAuthor = styled.p`
     font-size: 1rem;
     font-weight: 400;
     font-family: serif;
-`;
-
-export const StyledLoadingOutlined = styled(LoadingOutlined)`
-    font-size: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60%;
-    margin: auto;
-    color: 'darkblue';
 `;

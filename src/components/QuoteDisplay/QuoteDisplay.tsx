@@ -10,9 +10,11 @@ import {
     QuoteText,
     QuoteContent,
     QuoteAuthor,
-    StyledLoadingOutlined,
 } from './QuoteDisplay.styles';
 import { Quote, BackgroundQuteImage } from '../../helper/interfaces';
+
+// Import the Spinner component
+import { Spinner } from '../index';
 
 const QuoteDisplay: React.FC = () => {
     const quote = useSelector<RootState, Quote | null>((state) => state.quote.quote);
@@ -51,7 +53,7 @@ const QuoteDisplay: React.FC = () => {
                     <QuoteAuthor>{quote.author}</QuoteAuthor>
                 </QuoteText>
             ) : (
-                <StyledLoadingOutlined spin />
+                 <Spinner/>
             )}
         </QuoteDisplayContainer>
     );
