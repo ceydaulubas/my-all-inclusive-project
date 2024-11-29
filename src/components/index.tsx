@@ -6,6 +6,8 @@ import RecipesSearchBar from './RecipesSearchBar/RecipesSearchBar';
 import RecipesFilter from './RecipesFilter/RecipesFilter';
 import PillListTable from './PillListTable/PillListTable';
 import PillListForm from './PillListForm/PillListForm';
+import TodoListForm from './TodoListForm/TodoListForm';
+import Spinner from './Spinner/Spinner';
 
 export {
     DailyNews,
@@ -16,4 +18,6 @@ export {
     RecipesFilter,
     PillListTable,
     PillListForm,
+    TodoListForm,
+    Spinner
 };

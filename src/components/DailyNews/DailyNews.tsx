@@ -9,8 +9,10 @@ import {
     DailyNewsContainer,
     DailyNewsHeader,
     DailyNewsList,
-    StyledLoadingOutlined,
 } from './DailyNews.styles';
+
+// Import the Spinner component
+import { Spinner } from '../index';
 
 export const DailyNews: React.FC = () => {
     const [dailyNewsData, setDailyNewsData] = useState<DailyNewsData[] | null>(null);
@@ -97,7 +99,7 @@ export const DailyNews: React.FC = () => {
                             </ul>
                         </div>
                     ) : (
-                        <StyledLoadingOutlined spin />
+                        <Spinner />
                     )}
                 </>
             )}
