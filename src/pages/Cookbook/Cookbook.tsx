@@ -18,7 +18,7 @@ import {
 } from './Cookbook.style';
 
 // Import Ant design
-import { Card } from 'antd';
+import { Card, Pagination } from 'antd';
 const { Meta } = Card;
 
 interface CookbookProps {
@@ -37,20 +37,43 @@ const Cookbook = () => {
     const [recipes, setRecipes] = useState<CookbookProps[] | null>(null);
     const [error, setError] = useState<string>('');
     const [favorites, setFavorites] = useState<number[]>([]);
+    const [filter, setFilter] = useState<string>('All');
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalRecipes, setTotalRecipes] = useState<number>(0);
+    const perPage = 30;
+
+    console.log('filter :>> ', filter);
+
+    const fetchRecipes = async (filter: string, query: string, page: number) => {
+        try {
+            const offset = (page - 1) * perPage;
+            const tag = query ? query.toLowerCase() : filter === 'All' ? null : `${filter.toLowerCase()}`;
+            const data = await fetchRandomRecipesApi(tag, perPage, offset);
+
+            // If there's a search query, filter the recipes
+            const filteredData = query
+                ? data.recipes.filter((recipe: CookbookProps) =>
+                      recipe.title.toLowerCase().includes(query.toLowerCase())
+                  )
+                : data.recipes;
+
+            setRecipes(filteredData);
+            setTotalRecipes(data.totalResults);
+        } catch (error) {
+            setError('Error fetching recipes');
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await fetchRandomRecipesApi();
-                setRecipes(data.recipes);
-            } catch (error) {
-                setError('Error fetching random recipes data');
-            }
-        };
-        fetchData();
-    }, []);
+        fetchRecipes(filter, searchQuery, currentPage);
+    }, [filter, searchQuery, currentPage]);
 
-    console.log('recipes', recipes);
+    const handleFilterChange = (newFilter: string) => {
+        setFilter(newFilter);
+        setSearchQuery('');
+    }
+
 
     const stripHtml = (html: string) => {
         const tempDiv = document.createElement('div');
@@ -75,6 +98,15 @@ const Cookbook = () => {
         window.location.href = url;
     };
 
+    // Handle page change
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    console.log('totalRecipes :>> ', totalRecipes);
+    console.log('perPage :>> ', perPage);
+    console.log('currentPage :>> ', currentPage);
+
     return (
         <div
             style={{
@@ -84,13 +116,12 @@ const Cookbook = () => {
             }}
         >
             <CookbookContainerImage>
-                {' '}
-                <RecipesSearchBar />
-                <RecipesFilter />
+                <RecipesSearchBar setSearchQuery={setSearchQuery} />
+                <RecipesFilter setFilter={handleFilterChange} />
             </CookbookContainerImage>
 
             <CookBookContainer>
-                {recipes &&
+                {recipes  && recipes.length>0 ? (
                     recipes.map((recipe: CookbookProps) => (
                         <CookbookCard
                             key={recipe.id}
@@ -133,8 +164,18 @@ const Cookbook = () => {
                                 description={truncateText(stripHtml(recipe.instructions), 10)}
                             />
                         </CookbookCard>
-                    ))}
+                    )) ): "There are no recipes to display, please search different recipe"}
             </CookBookContainer>
+
+            {totalRecipes > perPage && (
+                <Pagination
+                    current={currentPage}
+                    total={totalRecipes}
+                    pageSize={perPage}
+                    onChange={handlePageChange}
+                    style={{ textAlign: 'center', marginTop: '20px' }}
+                />
+            )}
         </div>
     );
 };

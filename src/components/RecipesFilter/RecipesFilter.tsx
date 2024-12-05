@@ -1,11 +1,11 @@
 import { RecipesFilterContainer } from './RecipesFilter.style';
 import { FilterButton, FilterButtonText } from './RecipesFilter.style';
 
-const RecipesFilter = () => {
-    const filterOptions = ['All', 'Meat', 'Chicken', 'Fish', 'Salad'];
+const RecipesFilter = ({ setFilter }: { setFilter: (filter: string) => void }) => {
+    const filterOptions = ['All', 'Red Meat', 'Chicken', 'Fish', 'Salad'];
 
     const onFilterSearch = (filter: string) => {
-        console.log(filter);
+        setFilter(filter); 
     };
 
     return (
@@ -20,4 +20,5 @@ const RecipesFilter = () => {
         </RecipesFilterContainer>
     );
 };
+
 export default RecipesFilter;

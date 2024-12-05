@@ -3,7 +3,7 @@ import { fetchRandomQuoteApi } from './fetchRandomQuoteApi';
 import { fetchDailyNews } from './fetchDailyNews';
 import { fetchDailyNews2 } from './fetchDailyNews';
 import { fetchLocationData } from './fetchLocationData';
-import { fetchRandomRecipesApi, fetchSearchRecipesApi } from './fetchRecipesApi';
+import { fetchRandomRecipesApi } from './fetchRecipesApi';
 
 export {
     fetchCurrentWeather,
@@ -13,5 +13,4 @@ export {
     fetchDailyNews2,
     fetchLocationData,
     fetchRandomRecipesApi,
-    fetchSearchRecipesApi,
 };

@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Slider } from 'react-styled-slider-component';
 import useResponsiveSlides from '../../hooks/useResponsiveSlidesHook';
 
-import { RecipesDisplayContainer } from './RecipesDisplay.styles';
+import { RecipesDisplayContainer , RecipeImage, RecipeTitle} from './RecipesDisplay.styles';
 
 // Import Api
 import { fetchRandomRecipesApi } from '../../api/index';
+
+// Import the Spinner component
+import { Spinner } from '../index';
 
 interface Recipe {
     id: number;
     title: string;
     image: string;
+    spoonacularSourceUrl: string;
 }
 
 const RecipesDisplay: React.FC = () => {
@@ -18,10 +22,15 @@ const RecipesDisplay: React.FC = () => {
     const [error, setError] = useState<string>('');
     const visibleSlides = useResponsiveSlides();
 
+    const perPage = 5; 
+    const tag = '';    
+    const offset = 0;   
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await fetchRandomRecipesApi();
+                const data = await fetchRandomRecipesApi(tag, perPage, offset);
+                console.log('data :>> ', data);
                 setRandomRecipesData(data.recipes);
             } catch (error) {
                 setError('Error fetching random recipes data');
@@ -29,27 +38,22 @@ const RecipesDisplay: React.FC = () => {
         };
 
         fetchData();
-    }, []);
+    }, [tag, perPage, offset]);
 
     const renderSlides = () => {
         if (!randomRecipesData || !randomRecipesData) return null;
 
-        console.log('randomRecipesData', randomRecipesData);
-
         return randomRecipesData.map((recipe: Recipe) => (
-            <div key={recipe.id}>
-                <img
-                    src={recipe?.image}
-                    alt={recipe.title}
-                    style={{ objectFit: 'fill', height: '300px', width: '300px' }}
-                />
-                <p>{recipe.title}</p>
+            <div key={recipe.id} className="slide" >
+                <RecipeImage src={recipe?.image} alt={recipe.title} onClick={() => window.open(`${recipe?.spoonacularSourceUrl}`, '_blank')}/>
+                <RecipeTitle>{recipe.title}</RecipeTitle>
             </div>
         ));
     };
 
     return (
         <RecipesDisplayContainer>
+            
             <h5>Recipes</h5>
             {error && <p>{error}</p>}
             {randomRecipesData ? (
@@ -65,17 +69,9 @@ const RecipesDisplay: React.FC = () => {
                     {renderSlides()}
                 </Slider>
             ) : (
-                <Slider>
-                    <div style={{ backgroundColor: 'red', height: '200px' }}>Slide 1</div>
-                    <div style={{ backgroundColor: 'blue', height: '200px' }}>Slide 2</div>
-                    <div style={{ backgroundColor: 'green', height: '200px' }}>Slide 3</div>
-                    <div style={{ backgroundColor: 'yellow', height: '200px' }}>Slide 4</div>
-                    <div style={{ backgroundColor: 'red', height: '200px' }}>Slide 5</div>
-                    <div style={{ backgroundColor: 'blue', height: '200px' }}>Slide 6</div>
-                    <div style={{ backgroundColor: 'green', height: '200px' }}>Slide 7</div>
-                    <div style={{ backgroundColor: 'yellow', height: '200px' }}>Slide 8</div>
-                </Slider>
+                <Spinner/>
             )}
+         
         </RecipesDisplayContainer>
     );
 };
