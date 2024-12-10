@@ -6,7 +6,7 @@ import Navbar from './layout/Navbar/Navbar';
 import { Header } from './layout';
 import './App.css';
 
-import { ShoopingList, Tasks, Cookbook, MealPlan, Calendar, PillList, TraverPlan } from './pages';
+import { ShoopingList, Cookbook, MealPlan, Calendar, PillList, TraverPlan, TodoList } from './pages';
 
 // Lazy-loaded pages
 const Home = React.lazy(() => import('./pages/Home/Home'));
@@ -65,10 +65,10 @@ const routeDefinitions = [
                 ),
             },
             {
-                path: '/tasks',
+                path: '/todo-list',
                 element: (
                     <Suspense fallback={<div>Loading...</div>}>
-                        <Tasks />
+                        <TodoList />
                     </Suspense>
                 ),
             },

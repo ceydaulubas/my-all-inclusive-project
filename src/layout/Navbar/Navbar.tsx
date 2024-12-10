@@ -48,9 +48,9 @@ const Navbar: React.FC = () => {
             path: '/shopping-list',
         },
         {
-            title: 'Tasks',
+            title: 'TodoList',
             icon: getIconWithSize(<ScheduleOutlined />),
-            path: '/tasks',
+            path: '/todo-list',
         },
         {
             title: 'Cookbook',
@@ -79,10 +79,16 @@ const Navbar: React.FC = () => {
         },
     ];
 
+    const onClickedToggleIcon =  () => {
+        console.log('isNavbarOpen :>> ', isNavbarOpen);
+        dispatch(togglePopup())
+
+    };
+
     return (
         <NavbarContainer isOpen={isNavbarOpen}>
             <NavbarContent>
-                <ToggleIcon onClick={() => dispatch(togglePopup())}>
+                <ToggleIcon onClick={() => onClickedToggleIcon()}>
                     {isNavbarOpen ? <BoldLeftOutlined /> : <BoldRightIconOutlined />}
                 </ToggleIcon>
                 <NavItems>
