@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
-import { Table, Button, Modal } from 'antd';
-import { DeleteOutlined, EditOutlined, PlusOutlined, MailOutlined, DownloadOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
+
+// Redux
 import { RootState } from '../../redux/store';
 import { deletePillData } from '../../redux/pillListSlice';
+
+// Components
 import PillListForm from '../PillListForm/PillListForm';
+
+// Ant Design
+import { Table, Button, Modal } from 'antd';
+import { DeleteOutlined, EditOutlined, PlusOutlined, MailOutlined, DownloadOutlined } from '@ant-design/icons';
+import { ColumnType } from 'antd/es/table';
+
+// PDF
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -68,15 +77,15 @@ const PillListTable: React.FC = () => {
         console.log('Send mail button clicked');
     };
 
-    const columns = [
-        { title: 'Medication', dataIndex: 'medication', key: 'medication' },
-        { title: 'Start Date', dataIndex: 'startDate', key: 'startDate' },
-        { title: 'Stop Date', dataIndex: 'stopDate', key: 'stopDate' },
-        { title: 'Purpose', dataIndex: 'purpose', key: 'purpose' },
-        { title: 'Dosage', dataIndex: 'dosage', key: 'dosage' },
-        { title: 'Time(s) of Day', dataIndex: 'timeOfDay', key: 'timeOfDay' },
-        { title: 'Frequency', dataIndex: 'frequency', key: 'frequency' },
-        { title: 'Expiration Date', dataIndex: 'expirationDate', key: 'expirationDate' },
+    const columns: ColumnType<any>[] = [
+        { title: 'Medication', dataIndex: 'medication', key: 'medication', responsive: ['xs','sm', 'md'] },
+        { title: 'Start Date', dataIndex: 'startDate', key: 'startDate', responsive: ['xs','sm', 'md']},
+        { title: 'Stop Date', dataIndex: 'stopDate', key: 'stopDate', responsive: ['xs','sm', 'md']},
+        { title: 'Purpose', dataIndex: 'purpose', key: 'purpose', responsive: ['xs','sm', 'md']},
+        { title: 'Dosage', dataIndex: 'dosage', key: 'dosage', responsive: ['xs','sm', 'md']},
+        { title: 'Time(s) of Day', dataIndex: 'timeOfDay', key: 'timeOfDay', responsive: ['xs','sm', 'md']},
+        { title: 'Frequency', dataIndex: 'frequency', key: 'frequency', responsive: ['xs','sm', 'md']},
+        { title: 'Expiration Date', dataIndex: 'expirationDate', key: 'expirationDate', responsive: ['xs','sm', 'md']},
         {
             title: 'Actions',
             key: 'actions',
@@ -86,6 +95,7 @@ const PillListTable: React.FC = () => {
                     <DeleteOutlined onClick={() => handleDelete(record.key)} />
                 </div>
             ),
+            responsive: ['xs','sm', 'md'],
         },
     ];
 
@@ -105,7 +115,7 @@ const PillListTable: React.FC = () => {
             </div>
 
             {/* Table always seems */}
-            <Table dataSource={tableData} columns={columns} pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30']}}/>
+            <Table dataSource={tableData} columns={columns} pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '30']}} scroll={{ x: 'max-content' }} />
 
             {/* Form inside of the modal*/}
             <Modal
