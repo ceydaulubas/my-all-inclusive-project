@@ -22,6 +22,7 @@ type FieldType = {
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     console.log('Success:', values);
+
 };
 
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
@@ -29,6 +30,7 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 };
 
 const TodoListForm: React.FC = () => {
+
     return (
         <TodoListFormContainer>
             <TodoListFormHeader>Tasks</TodoListFormHeader>

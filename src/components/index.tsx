@@ -7,6 +7,7 @@ import RecipesFilter from './RecipesFilter/RecipesFilter';
 import PillListTable from './PillListTable/PillListTable';
 import PillListForm from './PillListForm/PillListForm';
 import TodoListForm from './TodoListForm/TodoListForm';
+import TodoListTable from './TodoListTable/TodoListTable';
 import Spinner from './Spinner/Spinner';
 
 export {
@@ -19,5 +20,6 @@ export {
     PillListTable,
     PillListForm,
     TodoListForm,
+    TodoListTable,
     Spinner
 };

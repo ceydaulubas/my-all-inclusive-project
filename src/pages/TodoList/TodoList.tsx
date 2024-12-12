@@ -1,11 +1,18 @@
 import React from 'react';
-import { TodoListForm } from '../../components/index';
+
+// Components
+import { TodoListForm , TodoListTable} from '../../components/index';
+
+// Styles
+import { TodoListContainer } from './TodoList.styles';
+
 
 function TodoList() {
     return (
-        <div>
+        <TodoListContainer>
             <TodoListForm />
-        </div>
+            <TodoListTable />
+        </TodoListContainer>
     );
 }
 
