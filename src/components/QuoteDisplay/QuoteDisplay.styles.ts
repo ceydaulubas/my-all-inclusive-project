@@ -4,8 +4,6 @@ import { LoadingOutlined } from '@ant-design/icons';
 export const QuoteDisplayContainer = styled.div<{ backgroundImage: string }>`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     background-image: url(${(props) => props.backgroundImage});
     background-position: center;
     background-size: cover;
@@ -20,6 +18,9 @@ export const QuoteHeader = styled.h5`
 export const QuoteText = styled.div`
     text-align: center;
     margin: 120px 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 
     @media (max-width: 768px) {
         margin: 60px 25px;
