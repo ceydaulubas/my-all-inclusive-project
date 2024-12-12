@@ -22,7 +22,7 @@ const RecipesDisplay: React.FC = () => {
     const [error, setError] = useState<string>('');
     const visibleSlides = useResponsiveSlides();
 
-    const perPage = 5; 
+    const perPage = 50; 
     const tag = '';    
     const offset = 0;   
 
