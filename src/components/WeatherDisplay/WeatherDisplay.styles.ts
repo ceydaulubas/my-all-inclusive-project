@@ -100,13 +100,3 @@ export const WeatherLocationIcon = styled.img`
 
 export const CurrentLocation = styled.p`
 `;
-
-export const StyledLoadingOutlined = styled(LoadingOutlined)`
-    font-size: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60%;
-    margin: auto;
-    color: 'darkblue';
-`;

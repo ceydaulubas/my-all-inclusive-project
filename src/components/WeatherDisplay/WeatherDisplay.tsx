@@ -22,11 +22,13 @@ import {
     WeatherLocationIconContainer,
     WeatherLocationIcon,
     CurrentLocation,
-    StyledLoadingOutlined,
 } from './WeatherDisplay.styles';
 
 // Import the interfaces
 import { WeatherData } from '../../helper/interfaces';
+
+// Import the Spinner component
+import { Spinner } from '../index';
 
 const WeatherDisplay: React.FC = () => {
     const [currentWeatherData, setCurrentWeatherData] = useState<WeatherData | null>(null);
@@ -150,7 +152,7 @@ const WeatherDisplay: React.FC = () => {
                                 </WeatherDetailsContainer>
                             </WeatherInfoContainer>
                         ) : (
-                            <StyledLoadingOutlined spin />
+                           <Spinner/>
                         )}
 
                         <WeatherThreeHoursForecastContainer>
